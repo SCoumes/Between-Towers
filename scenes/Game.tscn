@@ -16,7 +16,7 @@ script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("CanvasLayer/Label")
 moduleDescriptionPanel = NodePath("CanvasLayer/ModuleDescriptionPanel")
-buildButtonsContainer = NodePath("CanvasLayer/HBoxContainer")
+buildButtonsContainer = NodePath("CanvasLayer/BuildButtonContainer")
 spawner = NodePath("Spawners/Spawner2")
 groundDetection = NodePath("GroundDetection")
 
@@ -32,15 +32,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ModuleDescriptionPanel" parent="CanvasLayer" instance=ExtResource("2_qvniw")]
+offset_left = -94.0
+offset_top = -285.0
+offset_right = -11.0
+offset_bottom = -165.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="BuildButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 30.0
-offset_right = 53.0
-offset_bottom = 70.0
+offset_left = 1042.0
+offset_top = -464.0
+offset_right = 1129.0
+offset_bottom = -295.0
 grow_vertical = 0
 
 [node name="Button" type="Button" parent="CanvasLayer"]
