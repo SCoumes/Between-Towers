@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0i4w0tcs6d53"]
 
-[ext_resource type="Script" path="res://ModuleDescriptionPanel.cs" id="1_0ssyi"]
+[ext_resource type="Script" path="res://scripts/ModuleDescriptionPanel.cs" id="1_0ssyi"]
 
 [node name="ModuleDescriptionPanel" type="PanelContainer" node_paths=PackedStringArray("moduleNameLabel", "moduleLevelLabel")]
 anchors_preset = 6

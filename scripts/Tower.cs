@@ -15,8 +15,8 @@ public partial class Tower : Node2D
     [Export]
     public Button TowerButton;
 
-    private PackedScene ShooterScene = GD.Load<PackedScene>("res://Shooter.tscn");
-    private static ButtonGroup towerButtonGroup = GD.Load<ButtonGroup>("res://TowersSelectionButtonGroup.tres");
+    private PackedScene ShooterScene = GD.Load<PackedScene>("res://scenes/Shooter.tscn");
+    private static ButtonGroup towerButtonGroup = GD.Load<ButtonGroup>("res://resources/TowersSelectionButtonGroup.tres");
 
     public bool IsFocused => TowerButton.ButtonPressed;
 

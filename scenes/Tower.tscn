@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqnalnvmitn84"]
+[gd_scene load_steps=9 format=3 uid="uid://b7ym2euv1b0mi"]
 
-[ext_resource type="Script" path="res://Tower.cs" id="1_7wrev"]
-[ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://tower_masonry.png" id="2_sui1n"]
-[ext_resource type="Texture2D" uid="uid://dadun8ekt1cqw" path="res://tower_modules.png" id="3_qj6bd"]
+[ext_resource type="Script" path="res://scripts/Tower.cs" id="1_7wrev"]
+[ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://assets/tower_masonry.png" id="2_sui1n"]
+[ext_resource type="Texture2D" uid="uid://dadun8ekt1cqw" path="res://assets/tower_modules.png" id="3_qj6bd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s0ou8"]
 texture = ExtResource("2_sui1n")

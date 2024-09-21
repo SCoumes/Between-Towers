@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cpahamhdsaeto"]
 
-[ext_resource type="Script" path="res://Game.cs" id="1_2tnd3"]
-[ext_resource type="PackedScene" uid="uid://cqnalnvmitn84" path="res://Tower.tscn" id="2_6y2jw"]
-[ext_resource type="PackedScene" uid="uid://d0i4w0tcs6d53" path="res://ModuleDescriptionPanel.tscn" id="2_qvniw"]
-[ext_resource type="Script" path="res://Spawner.cs" id="4_0j4sp"]
+[ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
+[ext_resource type="PackedScene" uid="uid://b7ym2euv1b0mi" path="res://scenes/Tower.tscn" id="2_6y2jw"]
+[ext_resource type="PackedScene" uid="uid://d0i4w0tcs6d53" path="res://scenes/ModuleDescriptionPanel.tscn" id="2_qvniw"]
+[ext_resource type="Script" path="res://scripts/Spawner.cs" id="4_0j4sp"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "moduleDescriptionPanel", "buildButtonsContainer", "spawner")]
 script = ExtResource("1_2tnd3")

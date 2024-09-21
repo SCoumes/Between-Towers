@@ -11,7 +11,7 @@ public partial class Spawner : Node2D
     public double SpawnDuration = 2;
     public double durationLeft = 0;
 
-    private PackedScene EnemyScene = GD.Load<PackedScene>("res://Enemy.tscn");
+    private PackedScene EnemyScene = GD.Load<PackedScene>("res://scenes/Enemy.tscn");
 
     public override void _Process(double delta)
     {
