@@ -36,21 +36,18 @@ public partial class Game : Node2D
 
     private bool waveInProgress = false;
 
-    private int waveIndex = 0;
-    private Queue<List<EnemyTemplate>> Waves;
 
     public Tower FocusTower => TowersComponent.GetChildren().Select(c => c as Tower).First(t => t.IsFocused);
 
+    [Export]
+    public GroundDetection groundDetection;
+    
     public override void _Ready()
     {
-        SetupWaves();
+        //SetupWaves();
 
-        (TowersComponent.GetChild(0) as Tower).AddModule(null);
-        (TowersComponent.GetChild(1) as Tower).AddModule(new TowerModule.PrincessModule());
-        (TowersComponent.GetChild(2) as Tower).AddModule(null);
         TowersComponent.GetChildren().Select(c => c as Tower).First().SetFocus();
 
-        SetBuildButton(null);
         SetBuildButton(new TowerModule.ArcherModule());
         SetBuildButton(new TowerModule.MarksmanModule());
         SetBuildButton(new TowerModule.CannonModule());
@@ -98,27 +95,24 @@ public partial class Game : Node2D
     public void SetBuildButton(TowerModule template)
     {
         var button = new Button();
-        button.Text = template == null ? "PLAIN_WALL" : template.Name;
+        button.Text = template.Name;
         button.Pressed += () =>
         {
-            var cost = template == null ? 2 : 5;
+            var cost = 5;
 
             if (Gold < cost)
                 return;
 
-            TowerModule module = null;
-            if (template != null)
+
+            if (FocusTower.Modules.Count > 0)
             {
-
-                if (FocusTower.Modules.Count > 0)
-                {
-                    if (template.Level > FocusTower.Modules.Last().Level)
-                        return;
-                }
-
-                // Copy to avoid reflection
-                module = (TowerModule)template.GetType().GetConstructors()[0].Invoke(null);
+                if (template.Level > FocusTower.Modules.Last().Level)
+                    return;
             }
+
+            // Copy to avoid reflection
+            TowerModule module = null;
+            module = (TowerModule)template.GetType().GetConstructors()[0].Invoke(null);
 
             Gold -= cost;
             FocusTower.AddModule(module);
@@ -129,33 +123,10 @@ public partial class Game : Node2D
 
     public void OnNextWaveButtonPressed()
     {
-        waveIndex++;
-        spawner.SetWave(Waves.Dequeue());
+        spawner.SetWave(Waves.NextWave());
         spawner.Active = true;
         waveInProgress = true;
     }
 
-    private void SetupWaves()
-    {
-        Waves = new();
 
-        var Wave1 = new List<EnemyTemplate>();
-        for (var i = 0; i < 10; i++) { Wave1.Add(EnemyTemplate.BASIC); }
-        Waves.Enqueue(Wave1);
-
-
-        var Wave2 = new List<EnemyTemplate>();
-        for (var j = 0; j < 4; j++)
-        {
-            for (var i = 0; i < 4; i++) { Wave2.Add(EnemyTemplate.BASIC); }
-            for (var i = 0; i < 2; i++) { Wave2.Add(EnemyTemplate.STRONG); }
-
-        }
-        Waves.Enqueue(Wave2);
-
-        var Wave3 = new List<EnemyTemplate>();
-        for (var i = 0; i < 50; i++) { Wave3.Add(EnemyTemplate.QUICK); }
-        Waves.Enqueue(Wave3);
-
-    }
 }

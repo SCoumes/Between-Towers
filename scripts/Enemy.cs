@@ -15,19 +15,22 @@ public partial class Enemy : CharacterBody2D
 
     private bool dead = false;
     private int currentHP;
-
+    private Vector2 velocity;
     public override void _Ready()
     {
         HealthBar.MaxValue = Template.MaxHP;
         currentHP = Template.MaxHP;
         HealthBar.Value = currentHP;
 
+        velocity = Template.Speed * Vector2.Down;
         animationPlayer.Play("idle");
     }
 
     public override void _Process(double delta)
     {
-        Translate(Template.Speed * (float)delta * Vector2.Down);
+        Vector2 wind = Waves.getWind();
+        velocity += 40 * (float)delta * wind;
+        Translate((float)delta * velocity);
     }
 
     public void Damage(int damage)
