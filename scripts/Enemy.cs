@@ -24,7 +24,8 @@ public partial class Enemy : CharacterBody2D
 
     public override void _Process(double delta)
     {
-        velocity = Wind.Blow(velocity, delta); 
+        Vector2 wind = Waves.getWind();
+        velocity += 40 * (float)delta * wind;
         Translate((float)delta * velocity);
     }
 

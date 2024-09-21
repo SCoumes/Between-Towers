@@ -36,8 +36,6 @@ public partial class Game : Node2D
 
     private bool waveInProgress = false;
 
-    private int waveIndex = 0;
-    private Queue<List<EnemyTemplate>> Waves;
 
     public Tower FocusTower => TowersComponent.GetChildren().Select(c => c as Tower).First(t => t.IsFocused);
 
@@ -46,7 +44,7 @@ public partial class Game : Node2D
     
     public override void _Ready()
     {
-        SetupWaves();
+        //SetupWaves();
 
         TowersComponent.GetChildren().Select(c => c as Tower).First().SetFocus();
 
@@ -125,33 +123,10 @@ public partial class Game : Node2D
 
     public void OnNextWaveButtonPressed()
     {
-        waveIndex++;
-        spawner.SetWave(Waves.Dequeue());
+        spawner.SetWave(Waves.NextWave());
         spawner.Active = true;
         waveInProgress = true;
     }
 
-    private void SetupWaves()
-    {
-        Waves = new();
 
-        var Wave1 = new List<EnemyTemplate>();
-        for (var i = 0; i < 10; i++) { Wave1.Add(EnemyTemplate.BASIC); }
-        Waves.Enqueue(Wave1);
-
-
-        var Wave2 = new List<EnemyTemplate>();
-        for (var j = 0; j < 4; j++)
-        {
-            for (var i = 0; i < 4; i++) { Wave2.Add(EnemyTemplate.BASIC); }
-            for (var i = 0; i < 2; i++) { Wave2.Add(EnemyTemplate.STRONG); }
-
-        }
-        Waves.Enqueue(Wave2);
-
-        var Wave3 = new List<EnemyTemplate>();
-        for (var i = 0; i < 50; i++) { Wave3.Add(EnemyTemplate.QUICK); }
-        Waves.Enqueue(Wave3);
-
-    }
 }
