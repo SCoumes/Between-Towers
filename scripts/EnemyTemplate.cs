@@ -10,7 +10,7 @@ public class EnemyTemplate
     public static readonly EnemyTemplate BASIC = new()
     {
         MaxHP = 6,
-        Speed = 50,
+        Speed = 150,
         HPCost = 1
     };
 
