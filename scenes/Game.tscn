@@ -12,6 +12,7 @@
 size = Vector2(1153, 59)
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "moduleDescriptionPanel", "buildButtonsContainer", "spawner", "groundDetection")]
+scale = Vector2(4, 4)
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("CanvasLayer/Label")
@@ -37,8 +38,10 @@ vertical_alignment = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 52.0
+offset_left = 1.0
+offset_top = 30.0
+offset_right = 53.0
+offset_bottom = 70.0
 grow_vertical = 0
 
 [node name="Button" type="Button" parent="CanvasLayer"]
@@ -51,19 +54,19 @@ text = "NEXT_PHASE"
 [node name="Towers" type="Node2D" parent="."]
 
 [node name="Tower" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(143, 520)
+position = Vector2(144, 590)
 
 [node name="Tower2" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(354, 518)
+position = Vector2(355, 588)
 
 [node name="Tower3" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(574, 514)
+position = Vector2(575, 584)
 
 [node name="Tower4" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(806, 515)
+position = Vector2(807, 585)
 
 [node name="Tower5" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(993, 514)
+position = Vector2(994, 584)
 
 [node name="Spawners" type="Node2D" parent="."]
 
@@ -89,7 +92,7 @@ script = ExtResource("6_occff")
 script = ExtResource("5_3rd4u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetection"]
-position = Vector2(576, 548)
+position = Vector2(577, 618)
 shape = SubResource("RectangleShape2D_43gbm")
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="OnNextWaveButtonPressed"]

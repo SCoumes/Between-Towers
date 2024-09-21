@@ -6,6 +6,8 @@ public partial class Spawner : Node2D
     [Export]
     public bool Active = true;
 
+    private bool LeaveScreenNow = false;
+
     [Export]
     public int SpawnerSpeed = 100;
 
@@ -21,10 +23,10 @@ public partial class Spawner : Node2D
 
     public override void _Process(double delta)
     {
-        Position += (float)delta * SpawnerSpeed * Vector2.Right;
 
         if (!Active)
             return;
+        Position += (float)delta * SpawnerSpeed * Vector2.Right;
 
         if (durationLeft > 0)
         {
@@ -40,12 +42,15 @@ public partial class Spawner : Node2D
         enemy.Position = Position;
 
         if (enemiesToSpawn.Count == 0)
-            Active = false;
+            LeaveScreenNow = true;
     }
 
     public void exitedScreen(){
-        if (Active)
+        if (!LeaveScreenNow){
         SpawnerSpeed *= -1;
+        } else {
+            Active = false;
+        }
     }
 
     public void SetWave(List<EnemyTemplate> enemies)
