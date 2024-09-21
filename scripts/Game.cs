@@ -48,12 +48,8 @@ public partial class Game : Node2D
     {
         SetupWaves();
 
-        (TowersComponent.GetChild(0) as Tower).AddModule(null);
-        (TowersComponent.GetChild(1) as Tower).AddModule(new TowerModule.PrincessModule());
-        (TowersComponent.GetChild(2) as Tower).AddModule(null);
         TowersComponent.GetChildren().Select(c => c as Tower).First().SetFocus();
 
-        SetBuildButton(null);
         SetBuildButton(new TowerModule.ArcherModule());
         SetBuildButton(new TowerModule.MarksmanModule());
         SetBuildButton(new TowerModule.CannonModule());
@@ -101,27 +97,24 @@ public partial class Game : Node2D
     public void SetBuildButton(TowerModule template)
     {
         var button = new Button();
-        button.Text = template == null ? "PLAIN_WALL" : template.Name;
+        button.Text = template.Name;
         button.Pressed += () =>
         {
-            var cost = template == null ? 2 : 5;
+            var cost = 5;
 
             if (Gold < cost)
                 return;
 
-            TowerModule module = null;
-            if (template != null)
+
+            if (FocusTower.Modules.Count > 0)
             {
-
-                if (FocusTower.Modules.Count > 0)
-                {
-                    if (template.Level > FocusTower.Modules.Last().Level)
-                        return;
-                }
-
-                // Copy to avoid reflection
-                module = (TowerModule)template.GetType().GetConstructors()[0].Invoke(null);
+                if (template.Level > FocusTower.Modules.Last().Level)
+                    return;
             }
+
+            // Copy to avoid reflection
+            TowerModule module = null;
+            module = (TowerModule)template.GetType().GetConstructors()[0].Invoke(null);
 
             Gold -= cost;
             FocusTower.AddModule(module);

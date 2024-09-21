@@ -20,35 +20,6 @@ public abstract class TowerModule
     {
         Name = name;
     }
-
-    public class PrincessModule : TowerModule
-    {
-        public int HP = 10;
-
-        public PrincessModule() : base("PRINCESS")
-        {
-            Level = 5;
-            TextureCoordinates = new Vector2I(0,0);
-            Cooldown = -1;
-            Radius = 32;
-        }
-
-        public override void Shoot(IEnumerable<Enemy> enemies)
-        {
-
-            foreach(var enemy in enemies)
-            {
-                HP -= enemy.Template.HPCost;
-                enemy.CallDeferred(Enemy.MethodName.QueueFree);
-            }
-
-            if (HP < 0)
-            {
-                GD.Print("Game over !");
-            }
-        }
-    }
-
     public class ArcherModule : TowerModule
     {
         public int Damage = 2;
