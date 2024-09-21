@@ -5,6 +5,9 @@ public partial class Enemy : CharacterBody2D
 {
     [Export]
     public ProgressBar HealthBar;
+    [Export]
+    private AnimationPlayer animationPlayer;
+
 
     public EnemyTemplate Template;
 
@@ -18,6 +21,8 @@ public partial class Enemy : CharacterBody2D
         HealthBar.MaxValue = Template.MaxHP;
         currentHP = Template.MaxHP;
         HealthBar.Value = currentHP;
+
+        animationPlayer.Play("idle");
     }
 
     public override void _Process(double delta)
