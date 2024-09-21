@@ -1,17 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpahamhdsaeto"]
+[gd_scene load_steps=7 format=3 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
 [ext_resource type="PackedScene" uid="uid://b7ym2euv1b0mi" path="res://scenes/Tower.tscn" id="2_6y2jw"]
 [ext_resource type="PackedScene" uid="uid://d0i4w0tcs6d53" path="res://scenes/ModuleDescriptionPanel.tscn" id="2_qvniw"]
 [ext_resource type="Script" path="res://scripts/Spawner.cs" id="4_0j4sp"]
+[ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "moduleDescriptionPanel", "buildButtonsContainer", "spawner")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43gbm"]
+size = Vector2(1153, 59)
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "moduleDescriptionPanel", "buildButtonsContainer", "spawner", "groundDetection")]
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("CanvasLayer/Label")
 moduleDescriptionPanel = NodePath("CanvasLayer/ModuleDescriptionPanel")
 buildButtonsContainer = NodePath("CanvasLayer/HBoxContainer")
 spawner = NodePath("Spawners/Spawner2")
+groundDetection = NodePath("GroundDetection")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -45,10 +50,10 @@ text = "NEXT_PHASE"
 position = Vector2(130, 499)
 
 [node name="Tower2" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(225, 497)
+position = Vector2(375, 499)
 
 [node name="Tower3" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(324, 497)
+position = Vector2(629, 499)
 
 [node name="Spawners" type="Node2D" parent="."]
 
@@ -61,5 +66,12 @@ Active = false
 position = Vector2(269, -22)
 script = ExtResource("4_0j4sp")
 Active = false
+
+[node name="GroundDetection" type="Area2D" parent="."]
+script = ExtResource("5_3rd4u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetection"]
+position = Vector2(580, 545)
+shape = SubResource("RectangleShape2D_43gbm")
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="OnNextWaveButtonPressed"]

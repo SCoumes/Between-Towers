@@ -41,6 +41,9 @@ public partial class Game : Node2D
 
     public Tower FocusTower => TowersComponent.GetChildren().Select(c => c as Tower).First(t => t.IsFocused);
 
+    [Export]
+    public GroundDetection groundDetection;
+    
     public override void _Ready()
     {
         SetupWaves();
