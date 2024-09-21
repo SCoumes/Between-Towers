@@ -46,6 +46,19 @@ public class Waves
                 return 2 * Vector2.Right;
         }
     }
+
+    public static int getSpawnerSpeed()
+    {
+        switch (waveIndex)
+        {
+            case 1:
+                return 100;
+            case 2:
+                return 100;
+            default:
+                return 50;
+        }
+    }
 }
 
     // public static Waves  
