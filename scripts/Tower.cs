@@ -1,93 +1,70 @@
-﻿using Godot;
+using Godot;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+
 
 public partial class Tower : Node2D
 {
-    public List<TowerModule> Modules = new();
 
-    [Export]
-    public TileMapLayer masonryLayer;
-    [Export]
-    public TileMapLayer moduleLayer;
-    [Export]
-    public Node2D shooters;
-    [Export]
-    public Button TowerButton;
+	public int size;
+	public List<TowerModule> modules; // The size of this should always be equal to size
+	// Called when the node enters the scene tree for the first time.
 
-    private PackedScene ShooterScene = GD.Load<PackedScene>("res://scenes/Shooter.tscn");
-    private static ButtonGroup towerButtonGroup = GD.Load<ButtonGroup>("res://resources/TowersSelectionButtonGroup.tres");
+	private Game game;
 
-    public bool IsFocused => TowerButton.ButtonPressed;
+ 	[Export]
+	private Sprite2D massonry;
+	
+	public override void _Ready()
+	{
+	}
 
-    public override void _Ready()
-    {
-        //Don't know why but they end up distints if set in the editor
-        TowerButton.ButtonGroup = towerButtonGroup;
-        masonryLayer.Clear();
-    }
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        if (@event is InputEventMouseButton mouseButtonEvent)
-        {
+	/// <summary>
+	/// Upgrade the tower. This is in charge of checking gold cost and failing if there is not enough gold.
+	/// </summary>
+	public void UpgradeTower(){
+		//upgrade tower
+	}
 
-            if (mouseButtonEvent.Pressed && mouseButtonEvent.ButtonIndex == MouseButton.Left)
-            {
-                //TODO IF VIEWPORT MOVES
-                var clickCoordinates = moduleLayer.LocalToMap(moduleLayer.ToLocal(mouseButtonEvent.GlobalPosition));
-
-                if (clickCoordinates.X != 0 || clickCoordinates.Y > 0)
-                    return;
-
-                Game.FocusModule = Modules.ElementAt(-clickCoordinates.Y);
-            }
-        }
-    }
-
-    public void AddModule(TowerModule module)
-    {
-        var moduleCoordinates = new Vector2I(0, -Modules.Count);
-
-        masonryLayer.SetCell(moduleCoordinates, 0, Modules.Count == 0 ? Vector2I.Zero : Vector2I.Right) ;
-        Modules.Add(module);
-
-        if (module == null)
-            return;
-
-        moduleLayer.SetCell(moduleCoordinates, 0, module.TextureCoordinates);
-
-        var shooter = ShooterScene.Instantiate<Shooter>();
+	public void AddModule(String ModuleName, int ModuleIndex){
+		// TODO: also check tower size and that the module index is on a build module
+		TowerModule module;
+		switch (ModuleName){
+			case "Archer":
+				module = new TowerModule.ArcherModule();
+				break;
+			case "Marksman":
+				module = new TowerModule.MarksmanModule();
+				break;
+			case "Cannon":
+				module = new TowerModule.CannonModule();
+				break;
+			case "Magic":
+				module = new TowerModule.MagicModule();
+				break;
+			default:
+				throw new Exception("Invalid module name");
+		}
+		if (Game.Gold < 5) {return;} // TODO: Change this to the actual cost of the module
+		modules.Add(module);
+		Game.Gold -= 5; // TODO: Change this to the actual cost of the module
+		
+		var shooter = ShooterScene.Instantiate<Shooter>();
         shooter.Position = masonryLayer.MapToLocal(moduleCoordinates) + masonryLayer.Position;
         shooter.Module = module;
         shooters.AddChild(shooter);
         shooter.SetDetectionRadius(module.Radius);
-    }
 
-    public void RemoveModuleAndAbove(TowerModule module)
-    {
-        var moduleIndex = Modules.IndexOf(module);
+		DrawTower();
+	}
 
-        for (var i = Modules.Count - 1; i >= moduleIndex; i--)
-        {
-            masonryLayer.SetCell(i * Vector2I.Up);
-            moduleLayer.SetCell(i * Vector2I.Up);
-        }
+	public void DrawTower(){
+		//draw tower
 
-        foreach (var shooter in shooters.GetChildren())
-        {
-            var shooterCoordinates = moduleLayer.LocalToMap((shooter as Shooter).Position);
-
-            // Assumes same local position for shooters
-            if (-shooterCoordinates.Y >= moduleIndex)
-                shooter.CallDeferred(MethodName.QueueFree);
-        }
-
-        Modules = Modules.Take(moduleIndex).ToList();
-    }
-
-    public void SetFocus()
-    {
-        TowerButton.ButtonPressed = true;
-    }
+	}
 }

@@ -20,6 +20,13 @@ public abstract class TowerModule
     {
         Name = name;
     }
+
+    public class BuildModule : TowerModule{
+        public override void Shoot(IEnumerable<Enemy> enemies) {}
+        public BuildModule() : base("BUILD") {
+            TextureCoordinates = new Vector2I(0, 0);
+        }
+    }
     public class ArcherModule : TowerModule
     {
         public int Damage = 2;

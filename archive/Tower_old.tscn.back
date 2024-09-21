@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7ym2euv1b0mi"]
+
+[ext_resource type="Script" path="res://scripts/Tower.cs" id="1_7wrev"]
+[ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://assets/tower_masonry.png" id="2_sui1n"]
+[ext_resource type="Texture2D" uid="uid://dadun8ekt1cqw" path="res://assets/tower_modules.png" id="3_qj6bd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s0ou8"]
+texture = ExtResource("2_sui1n")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jrnte"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_s0ou8")
+tile_proxies/coords_level = [[0, Vector2i(0, 0)], [2, Vector2i(0, 0)], [1, Vector2i(0, 0)], [13, Vector2i(0, 0)], [1, Vector2i(1, 0)], [13, Vector2i(1, 0)], [3, Vector2i(0, 0)], [8, Vector2i(0, 0)], [4, Vector2i(0, 0)], [8, Vector2i(1, 0)], [5, Vector2i(0, 0)], [7, Vector2i(0, 0)], [6, Vector2i(0, 0)], [7, Vector2i(1, 0)], [9, Vector2i(0, 0)], [11, Vector2i(0, 0)], [10, Vector2i(0, 0)], [11, Vector2i(1, 0)], [12, Vector2i(0, 0)], [13, Vector2i(2, 0)]]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p3mf6"]
+texture = ExtResource("3_qj6bd")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xs5x1"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_p3mf6")
+tile_proxies/coords_level = [[1, Vector2i(0, 0)], [7, Vector2i(0, 0)], [2, Vector2i(0, 0)], [7, Vector2i(1, 0)], [3, Vector2i(0, 0)], [7, Vector2i(2, 0)], [4, Vector2i(0, 0)], [7, Vector2i(3, 0)], [6, Vector2i(0, 0)], [7, Vector2i(4, 0)]]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_k87cv"]
+
+[node name="Tower" type="Node2D" node_paths=PackedStringArray("masonryLayer", "moduleLayer", "shooters", "TowerButton")]
+script = ExtResource("1_7wrev")
+masonryLayer = NodePath("MasonryLayer")
+moduleLayer = NodePath("ModuleLayer")
+shooters = NodePath("Shooters")
+TowerButton = NodePath("Button")
+
+[node name="MasonryLayer" type="TileMapLayer" parent="."]
+position = Vector2(-16, -16)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_jrnte")
+
+[node name="ModuleLayer" type="TileMapLayer" parent="."]
+position = Vector2(-16, -16)
+tile_set = SubResource("TileSet_xs5x1")
+
+[node name="Shooters" type="Node2D" parent="."]
+
+[node name="Button" type="Button" parent="."]
+offset_left = -21.0
+offset_top = 25.0
+offset_right = 22.0
+offset_bottom = 56.0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_k87cv")
+text = "THIS"

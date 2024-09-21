@@ -38,9 +38,6 @@ public partial class Game : Node2D
 
     public static int ActiveEnemies = 0;
 
-
-    public Tower FocusTower => TowersComponent.GetChildren().Select(c => c as Tower).First(t => t.IsFocused);
-
     [Export]
     public GroundDetection groundDetection;
     
@@ -50,24 +47,11 @@ public partial class Game : Node2D
 
         Waves.game = this;
 
-        TowersComponent.GetChildren().Select(c => c as Tower).First().SetFocus();
-
         SetBuildButton(new TowerModule.ArcherModule());
         SetBuildButton(new TowerModule.MarksmanModule());
         SetBuildButton(new TowerModule.CannonModule());
         SetBuildButton(new TowerModule.MagicModule());
 
-        moduleDescriptionPanel.ModifyModule += (string action) =>
-        {
-            switch (action)
-            {
-                case "DESTROY":
-                    FocusTower.RemoveModuleAndAbove(focusModule);
-
-
-                    return;
-            }
-        };
     }
 
     public override void _Process(double delta)
@@ -100,27 +84,7 @@ public partial class Game : Node2D
     {
         var button = new Button();
         button.Text = template.Name;
-        button.Pressed += () =>
-        {
-            var cost = 5;
-
-            if (Gold < cost)
-                return;
-
-
-            if (FocusTower.Modules.Count > 0)
-            {
-                if (template.Level > FocusTower.Modules.Last().Level)
-                    return;
-            }
-
-            // Copy to avoid reflection
-            TowerModule module = null;
-            module = (TowerModule)template.GetType().GetConstructors()[0].Invoke(null);
-
-            Gold -= cost;
-            FocusTower.AddModule(module);
-        };
+        button.Pressed += () => {};
 
         buildButtonsContainer.AddChild(button);
     }

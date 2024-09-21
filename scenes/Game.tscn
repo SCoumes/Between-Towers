@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
-[ext_resource type="PackedScene" uid="uid://b7ym2euv1b0mi" path="res://scenes/Tower.tscn" id="2_6y2jw"]
 [ext_resource type="PackedScene" uid="uid://d0i4w0tcs6d53" path="res://scenes/ModuleDescriptionPanel.tscn" id="2_qvniw"]
+[ext_resource type="PackedScene" uid="uid://dd8w8tk4kbuf8" path="res://scenes/Tower.tscn" id="3_jxpa0"]
 [ext_resource type="Script" path="res://scripts/Spawner.cs" id="4_0j4sp"]
 [ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
 [ext_resource type="Texture2D" uid="uid://3fi2t4833qe3" path="res://assets/princess.png" id="5_knr1t"]
@@ -56,20 +56,20 @@ text = "NEXT_PHASE"
 
 [node name="Towers" type="Node2D" parent="."]
 
-[node name="Tower" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(144, 590)
+[node name="Tower" parent="Towers" instance=ExtResource("3_jxpa0")]
+position = Vector2(152, 591)
 
-[node name="Tower2" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(355, 588)
+[node name="Tower2" parent="Towers" instance=ExtResource("3_jxpa0")]
+position = Vector2(338, 586)
 
-[node name="Tower3" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(575, 584)
+[node name="Tower3" parent="Towers" instance=ExtResource("3_jxpa0")]
+position = Vector2(578, 585)
 
-[node name="Tower4" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(807, 585)
+[node name="Tower4" parent="Towers" instance=ExtResource("3_jxpa0")]
+position = Vector2(820, 588)
 
-[node name="Tower5" parent="Towers" instance=ExtResource("2_6y2jw")]
-position = Vector2(994, 584)
+[node name="Tower5" parent="Towers" instance=ExtResource("3_jxpa0")]
+position = Vector2(1002, 585)
 
 [node name="Spawners" type="Node2D" parent="."]
 
