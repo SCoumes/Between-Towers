@@ -40,9 +40,20 @@ public partial class Enemy : CharacterBody2D
 
         if (currentHP <= 0)
         {
+            Die();
+        }
+    }
+
+    public void exitedScreen()
+    {
+        Die();
+    }
+
+    public void Die(){
             dead = true;
             Game.Gold += 1;
+            Game.ActiveEnemies -= 1;
             CallDeferred(MethodName.QueueFree);
-        }
+ 
     }
 }

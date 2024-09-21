@@ -5,17 +5,49 @@ using System.Collections.Generic;
 public class Waves
 {
     private static int waveIndex = 0;
+    private static List<Spawner> spawners = new();
 
-    public static List<EnemyTemplate> NextWave()
+
+    public static Game game;
+
+    public static void NextWave(){
+        waveIndex += 1;
+        List<List<EnemyTemplate>> EnemiesLists = _GetEnemies(waveIndex);
+        List<int[]> Ranges = _getRanges(waveIndex); // Same toplevel list size as EnemiesLists, each array has 2 elements
+        foreach (var enemies in EnemiesLists)
+        {
+            _SpawnDragon(enemies, Ranges[EnemiesLists.IndexOf(enemies)]);
+        }
+    }
+
+    /// <summary>
+    /// Checks if all the enemies have been spawned.
+    /// </summary>
+    /// <returns></returns>
+    public static bool DoneSpawning()
+    {
+        return spawners.All(spawner => !spawner.Active);
+    }
+
+    private static void _cleanSpawners()
+    {
+        foreach (var spawner in spawners)
+        {
+            spawner.QueueFree();
+        }
+        spawners.Clear();
+    }
+
+    private static List<List<EnemyTemplate>> _GetEnemies(int IndexNumber)
     {
         waveIndex += 1;
-        switch (waveIndex)
+        switch (IndexNumber)
         {
             case 1:
                 {
                     var enemies = new List<EnemyTemplate>(); 
                     for (var i = 0; i < 10; i++) { enemies.Add(EnemyTemplate.BASIC); }
-                    return enemies;
+                    return new(){enemies};
                 }
 
             case 2:
@@ -23,15 +55,40 @@ public class Waves
                     var enemies = new List<EnemyTemplate>(); 
                     for (var i = 0; i < 4; i++) { enemies.Add(EnemyTemplate.BASIC); }
                     for (var i = 0; i < 2; i++) { enemies.Add(EnemyTemplate.STRONG); }
-                    return enemies;
+                    return new(){enemies};
             }
             default:
                 {
                     var enemies = new List<EnemyTemplate>();
                     for (var i = 0; i < 50; i++) { enemies.Add(EnemyTemplate.QUICK); }
-                    return enemies;
+                    return new(){enemies};
                 }
         }
+    }
+
+    private static List<int[]> _getRanges(int IndexNumber)
+    {
+        switch (IndexNumber)
+        {
+            case 1:
+                return new() { new int[2] {100, 300} };
+            case 2:
+                return new() { new int[2] {100, 300} };
+            default:
+                return new() { new int[2] {100, 300} };
+        }
+    }
+
+    private static void _SpawnDragon(List<EnemyTemplate> enemies, int[] range)
+    {
+        int min = range[0];
+        int max = range[1];
+        PackedScene SceneOfSpawner = GD.Load<PackedScene>("res://scenes/Spawner.tscn");
+        var spawner = SceneOfSpawner.Instantiate<Spawner>();
+        game.AddChild(spawner);
+        spawner.game = game;
+        spawner.SetWave(enemies);
+        spawners.Add(spawner);
     }
 
     public static Vector2 getWind()

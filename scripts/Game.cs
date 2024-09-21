@@ -34,7 +34,9 @@ public partial class Game : Node2D
     private static TowerModule focusModule = null;
     private static bool dirtyModule = false;
 
-    private bool waveInProgress = false;
+    private static bool waveInProgress = false;
+
+    public static int ActiveEnemies = 0;
 
 
     public Tower FocusTower => TowersComponent.GetChildren().Select(c => c as Tower).First(t => t.IsFocused);
@@ -45,6 +47,8 @@ public partial class Game : Node2D
     public override void _Ready()
     {
         //SetupWaves();
+
+        Waves.game = this;
 
         TowersComponent.GetChildren().Select(c => c as Tower).First().SetFocus();
 
@@ -80,7 +84,7 @@ public partial class Game : Node2D
             dirtyModule = true;
         }
 
-        if (waveInProgress && !spawner.Active && spawner.GetChildCount() == 0)
+        if (waveInProgress && ActiveEnemies == 0 && Waves.DoneSpawning())
         {
             GD.Print("Wave finished !");
             Gold += 10;
@@ -123,9 +127,10 @@ public partial class Game : Node2D
 
     public void OnNextWaveButtonPressed()
     {
-        spawner.SetWave(Waves.NextWave());
-        spawner.Active = true;
-        waveInProgress = true;
+        if (!waveInProgress){
+            Waves.NextWave();
+            waveInProgress = true;
+        }
     }
 
 

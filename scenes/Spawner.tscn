@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://qw1ko0jqjnda"]
+
+[ext_resource type="Script" path="res://scripts/Spawner.cs" id="1_y006g"]
+[ext_resource type="Texture2D" uid="uid://3fi2t4833qe3" path="res://assets/princess.png" id="2_xiuo7"]
+[ext_resource type="Script" path="res://scripts/VisibleOnScreenNotifier2d.cs" id="3_jt5vw"]
+
+[node name="Spawner" type="Node2D"]
+position = Vector2(6, 6)
+script = ExtResource("1_y006g")
+Active = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(22, 35)
+texture = ExtResource("2_xiuo7")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+script = ExtResource("3_jt5vw")

@@ -39,6 +39,7 @@ public partial class Spawner : Node2D
         var enemy = EnemyScene.Instantiate<Enemy>();
         enemy.Template = enemiesToSpawn.Pop();
         game.AddChild(enemy);
+        Game.ActiveEnemies++;
         enemy.Position = Position;
 
         if (enemiesToSpawn.Count == 0)
@@ -55,6 +56,7 @@ public partial class Spawner : Node2D
 
     public void SetWave(List<EnemyTemplate> enemies)
     {
+        Active = true;
         Position = Vector2.Zero;
         SpawnerSpeed = Waves.getSpawnerSpeed();
         enemiesToSpawn.Clear();
