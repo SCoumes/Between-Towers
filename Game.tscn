@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpahamhdsaeto"]
+
+[ext_resource type="Script" path="res://Game.cs" id="1_2tnd3"]
+[ext_resource type="PackedScene" uid="uid://cqnalnvmitn84" path="res://Tower.tscn" id="2_6y2jw"]
+[ext_resource type="PackedScene" uid="uid://d0i4w0tcs6d53" path="res://ModuleDescriptionPanel.tscn" id="2_qvniw"]
+[ext_resource type="Script" path="res://Spawner.cs" id="4_0j4sp"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "moduleDescriptionPanel", "buildButtonsContainer", "spawner")]
+script = ExtResource("1_2tnd3")
+TowersComponent = NodePath("Towers")
+GoldCounter = NodePath("CanvasLayer/Label")
+moduleDescriptionPanel = NodePath("CanvasLayer/ModuleDescriptionPanel")
+buildButtonsContainer = NodePath("CanvasLayer/HBoxContainer")
+spawner = NodePath("Spawners/Spawner2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 7.0
+offset_top = 34.0
+offset_right = 17.0
+offset_bottom = 57.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ModuleDescriptionPanel" parent="CanvasLayer" instance=ExtResource("2_qvniw")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 52.0
+grow_vertical = 0
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "NEXT_PHASE"
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="Tower" parent="Towers" instance=ExtResource("2_6y2jw")]
+position = Vector2(130, 499)
+
+[node name="Tower2" parent="Towers" instance=ExtResource("2_6y2jw")]
+position = Vector2(225, 497)
+
+[node name="Tower3" parent="Towers" instance=ExtResource("2_6y2jw")]
+position = Vector2(324, 497)
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Spawner" type="Node2D" parent="Spawners"]
+position = Vector2(167, -23)
+script = ExtResource("4_0j4sp")
+Active = false
+
+[node name="Spawner2" type="Node2D" parent="Spawners"]
+position = Vector2(269, -22)
+script = ExtResource("4_0j4sp")
+Active = false
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="OnNextWaveButtonPressed"]
