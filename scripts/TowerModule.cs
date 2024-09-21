@@ -8,7 +8,7 @@ public abstract class TowerModule
 {
     public Vector2I TextureCoordinates;
     public double Cooldown;
-    public int Radius = 64;
+    public int Radius = 128;
     public int Level = 1;
 
     public readonly string Name;

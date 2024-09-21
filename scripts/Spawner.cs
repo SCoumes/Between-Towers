@@ -21,9 +21,10 @@ public partial class Spawner : Node2D
 
     public override void _Process(double delta)
     {
+        Position += (float)delta * SpawnerSpeed * Vector2.Right;
+
         if (!Active)
             return;
-        Position += (float)delta * SpawnerSpeed * Vector2.Right;
 
         if (durationLeft > 0)
         {
@@ -43,6 +44,7 @@ public partial class Spawner : Node2D
     }
 
     public void exitedScreen(){
+        if (Active)
         SpawnerSpeed *= -1;
     }
 
