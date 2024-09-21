@@ -15,9 +15,11 @@ public partial class Spawner : Node2D
     public Game game;
 
     private Stack<EnemyTemplate> enemiesToSpawn = new();
+    private int minRange;
+    private int maxRange;
 
-    public double SpawnDuration = 2;
-    public double durationLeft = 0;
+    public double SpawnDuration = 1; // Time window between two spawns
+    public double durationLeft = 0; // Time left to spawn next enemy
 
     private PackedScene EnemyScene = GD.Load<PackedScene>("res://scenes/Enemy.tscn");
 
@@ -31,6 +33,11 @@ public partial class Spawner : Node2D
         if (durationLeft > 0)
         {
             durationLeft -= delta;
+            return;
+        }
+
+        if (Position.X < minRange || Position.X > maxRange)
+        {
             return;
         }
 
@@ -54,7 +61,7 @@ public partial class Spawner : Node2D
         }
     }
 
-    public void SetWave(List<EnemyTemplate> enemies)
+    public void SetWave(List<EnemyTemplate> enemies, int minRange, int maxRange)
     {
         Active = true;
         Position = Vector2.Zero;
@@ -65,5 +72,7 @@ public partial class Spawner : Node2D
         {
             enemiesToSpawn.Push(enemy);
         }
+        this.minRange = minRange;
+        this.maxRange = maxRange;
     }
 }

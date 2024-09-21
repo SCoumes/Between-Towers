@@ -71,11 +71,11 @@ public class Waves
         switch (IndexNumber)
         {
             case 1:
-                return new() { new int[2] {100, 300} };
+                return new() { new int[2] {100, 800} };
             case 2:
-                return new() { new int[2] {100, 300} };
+                return new() { new int[2] {100, 800} };
             default:
-                return new() { new int[2] {100, 300} };
+                return new() { new int[2] {100, 800} };
         }
     }
 
@@ -87,7 +87,7 @@ public class Waves
         var spawner = SceneOfSpawner.Instantiate<Spawner>();
         game.AddChild(spawner);
         spawner.game = game;
-        spawner.SetWave(enemies);
+        spawner.SetWave(enemies, min, max);
         spawners.Add(spawner);
     }
 
