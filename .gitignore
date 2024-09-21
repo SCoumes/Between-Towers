@@ -21,6 +21,7 @@ mono_crash.*.json
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+.vs/
 
 # Local History for Visual Studio Code
 .history/
