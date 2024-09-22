@@ -28,8 +28,7 @@ public partial class Enemy : CharacterBody2D
 
     public override void _Process(double delta)
     {
-        Vector2 wind = Waves.getWind();
-        velocity += 40 * (float)delta * wind;
+        velocity += (float)delta * Waves.getWind();
         Translate((float)delta * velocity);
     }
 

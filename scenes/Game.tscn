@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43gbm"]
 size = Vector2(1153, 59)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "groundDetection", "tower1", "tower2", "tower3", "tower4", "tower5")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "groundDetection", "WindValue", "tower1", "tower2", "tower3", "tower4", "tower5")]
 scale = Vector2(2, 2)
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
@@ -18,6 +18,7 @@ buildButtonsContainer = NodePath("CanvasLayer/BuildButtonContainer")
 UpgradeButtonGroup = ExtResource("8_p16dp")
 testTower = NodePath("Towers/Tower3")
 groundDetection = NodePath("GroundDetection")
+WindValue = NodePath("Wind display/Value")
 tower1 = NodePath("Towers/Tower")
 tower2 = NodePath("Towers/Tower2")
 tower3 = NodePath("Towers/Tower3")
@@ -44,9 +45,10 @@ offset_bottom = 29.0
 text = "NEXT_PHASE"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-offset_top = 29.0
-offset_right = 40.0
-offset_bottom = 52.0
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 60.0
+offset_bottom = 84.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
@@ -88,32 +90,51 @@ position = Vector2(577, 618)
 shape = SubResource("RectangleShape2D_43gbm")
 
 [node name="Buttons" type="Node2D" parent="."]
+position = Vector2(-3.5, 57.5)
 
 [node name="Upgrade" type="Button" parent="Buttons"]
-offset_left = 8.0
-offset_top = 80.5
-offset_right = 83.0
-offset_bottom = 111.5
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 103.0
+offset_bottom = 59.0
 toggle_mode = true
 button_group = ExtResource("8_p16dp")
 text = "Upgrade"
 
 [node name="Remove module" type="Button" parent="Buttons"]
-offset_left = 8.5
-offset_top = 116.0
-offset_right = 79.5
-offset_bottom = 147.0
+offset_left = 5.5
+offset_top = 49.0
+offset_right = 100.5
+offset_bottom = 104.0
 toggle_mode = true
 button_group = ExtResource("8_p16dp")
 text = "Remove"
 
 [node name="Archer" type="Button" parent="Buttons"]
-offset_left = 10.0
-offset_top = 151.5
-offset_right = 78.0
-offset_bottom = 182.5
+offset_left = 7.0
+offset_top = 91.5
+offset_right = 99.0
+offset_bottom = 146.5
 toggle_mode = true
 button_group = ExtResource("8_p16dp")
 text = "Archers"
+
+[node name="Wind display" type="Node2D" parent="."]
+
+[node name="Label" type="RichTextLabel" parent="Wind display"]
+offset_left = 1016.0
+offset_top = 4.0
+offset_right = 1062.0
+offset_bottom = 29.0
+text = "Wind"
+fit_content = true
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="Wind display"]
+offset_left = 1065.0
+offset_top = 4.0
+offset_right = 1153.0
+offset_bottom = 29.0
+scroll_active = false
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="OnNextWaveButtonPressed"]

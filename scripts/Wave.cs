@@ -16,6 +16,7 @@ public class Waves
         {
             _SpawnDragon(enemies, Ranges[EnemiesLists.IndexOf(enemies)]);
         }
+        _SetWind();
     }
 
     public static void EndWave(){
@@ -69,6 +70,11 @@ public class Waves
         spawners.Add(spawner);
     }
 
+    private static void _SetWind()
+    {
+        Game.game.WindValue.Text = getWindSpeed().ToString();
+    }
+
     private static List<List<EnemyTemplate>> _GetEnemies(int IndexNumber, bool debug = true)
     {
         if (debug) { return new(){new(){EnemyTemplate.BASIC}}; }
@@ -110,17 +116,24 @@ public class Waves
         }
     }
 
-    public static Vector2 getWind()
+    private static int getWindSpeed()
     {
         switch (waveIndex)
         {
             case 1:
-                return Vector2.Zero;
+                return 0;
             case 2:
-                return Vector2.Right;
+                return 20;
+            case 3:
+                return -20;
             default:
-                return 2 * Vector2.Right;
+                return 2;
         }
+    }
+
+    public static Vector2 getWind()
+    {
+        return getWindSpeed() * Vector2.Right;
     }
 
     public static int getSpawnerSpeed()

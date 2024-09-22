@@ -1,8 +1,8 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://3ijscbms8uv4"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cdv07ebo5cetn"]
 
-[ext_resource type="Texture2D" uid="uid://8mw74vt7w813" path="res://assets/ui/Button_Hover.png" id="1_luabe"]
-[ext_resource type="Texture2D" uid="uid://dfljau2bpyrfb" path="res://assets/ui/Button_Red.png" id="2_ajyy7"]
-[ext_resource type="Texture2D" uid="uid://cfk0q2usv2sgh" path="res://assets/ui/Button_Red_Pressed.png" id="3_wh6dp"]
+[ext_resource type="Texture2D" uid="uid://bvd02akpr6hfi" path="res://assets/ui/Button_Hover.png" id="1_luabe"]
+[ext_resource type="Texture2D" uid="uid://b1h70s8y6ep82" path="res://assets/ui/Button_Red.png" id="2_ajyy7"]
+[ext_resource type="Texture2D" uid="uid://c7hpt6aej7nee" path="res://assets/ui/Button_Red_Pressed.png" id="3_wh6dp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wu4n"]
 
