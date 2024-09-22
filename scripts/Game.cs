@@ -25,7 +25,7 @@ public partial class Game : Node
         set { dirtyGold = true; gold = value; }
     }
 
-    private static int gold = 999;
+    private static int gold = 30;
     private static bool dirtyGold = true;
 
     private static bool waveInProgress = false;

@@ -13,6 +13,8 @@ public partial class Spawner : Node2D
     public Game game;
     [Export]
     public AnimationPlayer animationPlayer;
+    private double delay;
+
     [Export] 
     public Sprite2D sprite;
 
@@ -22,9 +24,9 @@ public partial class Spawner : Node2D
     private int minRange;
     private int maxRange;
 
-    public double SpawnDuration = 1; // Time window between two spawns
+    public double SpawnDuration = 0.4; // Time window between two spawns
     public double durationLeft = 0; // Time left to spawn next enemy
-    public Vector2 StartingPosition = Vector2.Zero;
+    public Vector2 StartingPosition;
 
     private PackedScene EnemyScene = GD.Load<PackedScene>("res://scenes/Enemy.tscn");
 
@@ -35,11 +37,17 @@ public partial class Spawner : Node2D
 
     public override void _Process(double delta)
     {
-
+        // Delay before launching the dragon
+        if (delay > 0)
+        {
+            delay -= delta;
+            return;
+        }
         if (!Active)
             return;
         Position += (float)delta * SpawnerSpeed * Vector2.Right;
 
+        // Delay before consecutive drops
         if (durationLeft > 0)
         {
             durationLeft -= delta;
@@ -71,15 +79,17 @@ public partial class Spawner : Node2D
         } 
         else 
         {
+            Position = 100 * Vector2.Left;
             Active = false;
         }
     }
 
-    public void SetWave(List<EnemyTemplate> enemies, int minRange, int maxRange)
+    public void SetWave(List<EnemyTemplate> enemies, int minRange, int maxRange, double delay)
     {
         Active = true;
         Position = StartingPosition;
         SpawnerSpeed = Waves.getSpawnerSpeed();
+        this.delay = delay;
         enemiesToSpawn.Clear();
         enemies.Reverse();
         foreach (var enemy in enemies)
