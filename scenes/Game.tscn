@@ -13,8 +13,8 @@ size = Vector2(1153, 59)
 scale = Vector2(2, 2)
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
-GoldCounter = NodePath("CanvasLayer/HBoxContainer/Label")
-buildButtonsContainer = NodePath("CanvasLayer/BuildButtonContainer")
+GoldCounter = NodePath("GUI/HBoxContainer/Label")
+buildButtonsContainer = NodePath("GUI/BuildButtonContainer")
 UpgradeButtonGroup = ExtResource("8_p16dp")
 testTower = NodePath("Towers/Tower3")
 groundDetection = NodePath("GroundDetection")
@@ -24,9 +24,9 @@ tower3 = NodePath("Towers/Tower3")
 tower4 = NodePath("Towers/Tower4")
 tower5 = NodePath("Towers/Tower5")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="BuildButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="BuildButtonContainer" type="VBoxContainer" parent="GUI"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -36,27 +36,43 @@ offset_right = 1129.0
 offset_bottom = -295.0
 grow_vertical = 0
 
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="Button" type="Button" parent="GUI"]
 offset_left = 2.0
 offset_top = -2.0
 offset_right = 108.0
 offset_bottom = 29.0
 text = "NEXT_PHASE"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
 offset_top = 29.0
 offset_right = 40.0
 offset_bottom = 52.0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="GUI/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_g6h03")
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer"]
+[node name="Label" type="Label" parent="GUI/HBoxContainer"]
 layout_mode = 2
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI"]
+offset_left = 151.0
+offset_right = 215.0
+offset_bottom = 48.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "WIND"
+
+[node name="Label2" type="Label" parent="GUI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "TODO"
 
 [node name="Towers" type="Node2D" parent="."]
 
@@ -116,4 +132,4 @@ toggle_mode = true
 button_group = ExtResource("8_p16dp")
 text = "Archers"
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="OnNextWaveButtonPressed"]
+[connection signal="pressed" from="GUI/Button" to="." method="OnNextWaveButtonPressed"]
