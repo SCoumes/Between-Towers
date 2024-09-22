@@ -36,6 +36,9 @@ public partial class Game : Node2D
     public GroundDetection groundDetection;
 
     [Export]
+    public RichTextLabel WindValue;
+
+    [Export]
     public Tower tower1;
 
     [Export]
@@ -73,7 +76,6 @@ public partial class Game : Node2D
         if (waveInProgress && ActiveEnemies == 0 && Waves.DoneSpawning())
         {
             Waves.EndWave();
-            GD.Print("Wave finished !");
             Gold += 10;
             waveInProgress = false;
         }
