@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
-[ext_resource type="Texture2D" uid="uid://brinvsly6ruao" path="res://assets/Golden Coin.png" id="2_g6h03"]
+[ext_resource type="Texture2D" uid="uid://cl8kfexckc7rq" path="res://assets/Golden Coin.png" id="2_g6h03"]
 [ext_resource type="PackedScene" uid="uid://dd8w8tk4kbuf8" path="res://scenes/Tower.tscn" id="3_jxpa0"]
 [ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
 [ext_resource type="ButtonGroup" uid="uid://cyp50tlpxv5sn" path="res://resources/UpgradeButtons.tres" id="8_p16dp"]
