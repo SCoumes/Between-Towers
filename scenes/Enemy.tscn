@@ -46,6 +46,7 @@ _data = {
 radius = 16.0
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthBar", "animationPlayer")]
+z_index = 4096
 script = ExtResource("1_rl4h8")
 HealthBar = NodePath("ProgressBar")
 animationPlayer = NodePath("Sprite2D/AnimationPlayer")
