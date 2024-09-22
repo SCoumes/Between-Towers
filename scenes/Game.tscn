@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://cpahamhdsaeto"]
+[gd_scene load_steps=15 format=4 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
 [ext_resource type="Texture2D" uid="uid://brinvsly6ruao" path="res://assets/Golden Coin.png" id="2_g6h03"]
 [ext_resource type="PackedScene" uid="uid://dd8w8tk4kbuf8" path="res://scenes/Tower.tscn" id="3_jxpa0"]
 [ext_resource type="Texture2D" uid="uid://cut074gmhk4mr" path="res://assets/world/BG1.png" id="3_sp32k"]
+[ext_resource type="Texture2D" uid="uid://cirq1bo5t21rh" path="res://assets/ui/Full_Pixel Heart Sprite Sheet 32x32.png" id="4_0n5qc"]
 [ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
 [ext_resource type="Texture2D" uid="uid://da6lba30m8mon" path="res://assets/world/BG3.png" id="5_8kr0m"]
 [ext_resource type="Texture2D" uid="uid://d4h5rdscmn5v7" path="res://assets/world/Tileset.png" id="6_u6fb1"]
@@ -62,13 +63,14 @@ sources/0 = SubResource("TileSetAtlasSource_cu6pa")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43gbm"]
 size = Vector2(1153, 59)
 
-[node name="Game" type="Node" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "groundDetection", "WindValue", "tower1", "tower2", "tower3", "tower4", "tower5", "buildupMusicPlayer", "battleMusicPlayer")]
+[node name="Game" type="Node" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "EnemiesComponent", "groundDetection", "WindValue", "tower1", "tower2", "tower3", "tower4", "tower5", "buildupMusicPlayer", "battleMusicPlayer", "playerHealthLabel", "gameOverDisplay")]
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("GUI/GoldDisplay/Label")
 buildButtonsContainer = NodePath("GUI/BuildButtonContainer")
 UpgradeButtonGroup = ExtResource("8_p16dp")
 testTower = NodePath("Towers/Tower3")
+EnemiesComponent = NodePath("Enemies")
 groundDetection = NodePath("GroundDetection")
 WindValue = NodePath("GUI/WindDisplay/VBoxContainer/Label2")
 tower1 = NodePath("Towers/Tower")
@@ -78,6 +80,8 @@ tower4 = NodePath("Towers/Tower4")
 tower5 = NodePath("Towers/Tower5")
 buildupMusicPlayer = NodePath("Music/Buildup")
 battleMusicPlayer = NodePath("Music/Battle")
+playerHealthLabel = NodePath("GUI/HealthBar/Label")
+gameOverDisplay = NodePath("GUI/GameOverDisplay")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -156,6 +160,55 @@ toggle_mode = true
 button_group = ExtResource("8_p16dp")
 text = "Archers"
 
+[node name="HealthBar" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="TextureRect" type="TextureRect" parent="GUI/HealthBar"]
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("4_0n5qc")
+
+[node name="Label" type="Label" parent="GUI/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverDisplay" type="CenterContainer" parent="GUI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/GameOverDisplay"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/GameOverDisplay/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/GameOverDisplay/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "GAME OVER !"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/GameOverDisplay/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RetryButton" type="Button" parent="GUI/GameOverDisplay/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Retry"
+
 [node name="Background" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -215,6 +268,8 @@ script = ExtResource("5_3rd4u")
 position = Vector2(577, 618)
 shape = SubResource("RectangleShape2D_43gbm")
 
+[node name="Enemies" type="Node2D" parent="."]
+
 [node name="Music" type="Node" parent="."]
 
 [node name="Buildup" type="AudioStreamPlayer" parent="Music"]
@@ -226,3 +281,4 @@ unique_name_in_owner = true
 stream = ExtResource("10_oss3c")
 
 [connection signal="pressed" from="GUI/Button" to="." method="OnNextWaveButtonPressed"]
+[connection signal="pressed" from="GUI/GameOverDisplay/PanelContainer/VBoxContainer/HBoxContainer/RetryButton" to="." method="StartGame"]

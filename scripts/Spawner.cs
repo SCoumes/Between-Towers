@@ -63,7 +63,7 @@ public partial class Spawner : Node2D
 
         var enemy = EnemyScene.Instantiate<Enemy>();
         enemy.Template = enemiesToSpawn.Pop();
-        game.AddChild(enemy);
+        Game.game.EnemiesComponent.AddChild(enemy);
         Game.ActiveEnemies++;
         enemy.Position = Position;
 
