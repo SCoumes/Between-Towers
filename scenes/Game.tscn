@@ -10,7 +10,6 @@
 size = Vector2(1153, 59)
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "groundDetection", "WindValue", "tower1", "tower2", "tower3", "tower4", "tower5")]
-scale = Vector2(2, 2)
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("GUI/HBoxContainer/Label")
@@ -134,8 +133,6 @@ toggle_mode = true
 button_group = ExtResource("8_p16dp")
 text = "Archers"
 
-[connection signal="pressed" from="GUI/Button" to="." method="OnNextWaveButtonPressed"]
-
 [node name="Wind display" type="Node2D" parent="."]
 
 [node name="Label" type="RichTextLabel" parent="Wind display"]
@@ -154,3 +151,4 @@ offset_right = 1153.0
 offset_bottom = 29.0
 scroll_active = false
 
+[connection signal="pressed" from="GUI/Button" to="." method="OnNextWaveButtonPressed"]
