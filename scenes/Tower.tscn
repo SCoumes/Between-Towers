@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dd8w8tk4kbuf8"]
 
 [ext_resource type="Script" path="res://scripts/Tower.cs" id="1_6d38i"]
-[ext_resource type="Texture2D" uid="uid://86fn652l7j55" path="res://assets/tower_masonry.png" id="2_mwwil"]
+[ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://assets/tower_masonry.png" id="2_mwwil"]
 
 [node name="Tower" type="Node2D"]
 position = Vector2(-1, -2)
