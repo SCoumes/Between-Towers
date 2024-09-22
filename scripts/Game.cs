@@ -167,7 +167,7 @@ public partial class Game : Node
         gameWonDisplay.Visible = false;
 
         Gold = 30;
-        PlayerHealth = 1;
+        PlayerHealth = 15;
 
         Waves.StartGame();
 
