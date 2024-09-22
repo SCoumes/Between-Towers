@@ -1,26 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpahamhdsaeto"]
+[gd_scene load_steps=6 format=3 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
-[ext_resource type="PackedScene" uid="uid://d0i4w0tcs6d53" path="res://scenes/ModuleDescriptionPanel.tscn" id="2_qvniw"]
 [ext_resource type="PackedScene" uid="uid://dd8w8tk4kbuf8" path="res://scenes/Tower.tscn" id="3_jxpa0"]
-[ext_resource type="Script" path="res://scripts/Spawner.cs" id="4_0j4sp"]
 [ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
-[ext_resource type="Texture2D" uid="uid://3fi2t4833qe3" path="res://assets/princess.png" id="5_knr1t"]
-[ext_resource type="Script" path="res://scripts/VisibleOnScreenNotifier2d.cs" id="6_occff"]
 [ext_resource type="ButtonGroup" uid="uid://cyp50tlpxv5sn" path="res://resources/UpgradeButtons.tres" id="8_p16dp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43gbm"]
 size = Vector2(1153, 59)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "moduleDescriptionPanel", "buildButtonsContainer", "spawner", "testTower", "groundDetection", "tower1", "tower2", "tower3", "tower4", "tower5")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "spawner", "testTower", "groundDetection", "tower1", "tower2", "tower3", "tower4", "tower5")]
 scale = Vector2(2, 2)
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("CanvasLayer/Label")
-moduleDescriptionPanel = NodePath("CanvasLayer/ModuleDescriptionPanel")
 buildButtonsContainer = NodePath("CanvasLayer/BuildButtonContainer")
 UpgradeButtonGroup = ExtResource("8_p16dp")
-spawner = NodePath("Spawners/Spawner2")
+spawner = NodePath("")
 testTower = NodePath("Towers/Tower3")
 groundDetection = NodePath("GroundDetection")
 tower1 = NodePath("Towers/Tower")
@@ -39,12 +34,6 @@ offset_bottom = 57.0
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ModuleDescriptionPanel" parent="CanvasLayer" instance=ExtResource("2_qvniw")]
-offset_left = -94.0
-offset_top = -285.0
-offset_right = -11.0
-offset_bottom = -165.0
 
 [node name="BuildButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 2
@@ -79,26 +68,6 @@ position = Vector2(820, 588)
 
 [node name="Tower5" parent="Towers" instance=ExtResource("3_jxpa0")]
 position = Vector2(1002, 585)
-
-[node name="Spawners" type="Node2D" parent="."]
-
-[node name="Spawner" type="Node2D" parent="Spawners"]
-position = Vector2(193, -4)
-script = ExtResource("4_0j4sp")
-Active = false
-
-[node name="Spawner2" type="Node2D" parent="Spawners" node_paths=PackedStringArray("game")]
-position = Vector2(6, 6)
-script = ExtResource("4_0j4sp")
-Active = false
-game = NodePath("../..")
-
-[node name="Sprite2D" type="Sprite2D" parent="Spawners/Spawner2"]
-position = Vector2(22, 35)
-texture = ExtResource("5_knr1t")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Spawners/Spawner2"]
-script = ExtResource("6_occff")
 
 [node name="GroundDetection" type="Area2D" parent="."]
 script = ExtResource("5_3rd4u")

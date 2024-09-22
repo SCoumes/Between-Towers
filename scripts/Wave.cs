@@ -18,6 +18,10 @@ public class Waves
         }
     }
 
+    public static void EndWave(){
+        _cleanSpawners();
+    }
+
     private static void _towerUlocks(int IndexNumber)
     {
         GD.Print("Unlocking towers", IndexNumber);
@@ -53,9 +57,21 @@ public class Waves
         }
         spawners.Clear();
     }
-
-    private static List<List<EnemyTemplate>> _GetEnemies(int IndexNumber)
+    private static void _SpawnDragon(List<EnemyTemplate> enemies, int[] range)
     {
+        int min = range[0];
+        int max = range[1];
+        PackedScene SceneOfSpawner = GD.Load<PackedScene>("res://scenes/Spawner.tscn");
+        var spawner = SceneOfSpawner.Instantiate<Spawner>();
+        Game.game.AddChild(spawner);
+        spawner.game = Game.game;
+        spawner.SetWave(enemies, min, max);
+        spawners.Add(spawner);
+    }
+
+    private static List<List<EnemyTemplate>> _GetEnemies(int IndexNumber, bool debug = true)
+    {
+        if (debug) { return new(){new(){EnemyTemplate.BASIC}}; }
         switch (IndexNumber)
         {
             case 1:
@@ -92,18 +108,6 @@ public class Waves
             default:
                 return new() { new int[2] {100, 800} };
         }
-    }
-
-    private static void _SpawnDragon(List<EnemyTemplate> enemies, int[] range)
-    {
-        int min = range[0];
-        int max = range[1];
-        PackedScene SceneOfSpawner = GD.Load<PackedScene>("res://scenes/Spawner.tscn");
-        var spawner = SceneOfSpawner.Instantiate<Spawner>();
-        Game.game.AddChild(spawner);
-        spawner.game = Game.game;
-        spawner.SetWave(enemies, min, max);
-        spawners.Add(spawner);
     }
 
     public static Vector2 getWind()

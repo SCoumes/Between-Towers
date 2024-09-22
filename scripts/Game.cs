@@ -11,8 +11,6 @@ public partial class Game : Node2D
     [Export]
     public Label GoldCounter;
     [Export]
-    private ModuleDescriptionPanel moduleDescriptionPanel;
-    [Export]
     private Container buildButtonsContainer;
     [Export]
     private ButtonGroup UpgradeButtonGroup;
@@ -59,10 +57,6 @@ public partial class Game : Node2D
     {
         //SetupWaves();
 
-        SetBuildButton("Build");
-        SetBuildButton("Archer");
-        SetBuildButton("Upgrade");
-
         game = this;
 
         tower3.UpgradeTower();
@@ -78,33 +72,11 @@ public partial class Game : Node2D
 
         if (waveInProgress && ActiveEnemies == 0 && Waves.DoneSpawning())
         {
+            Waves.EndWave();
             GD.Print("Wave finished !");
             Gold += 10;
             waveInProgress = false;
         }
-    }
-
-    public void OnTowerButtonPressed()
-    {
-    }
-
-    public void SetBuildButton(String name)
-    {
-        var button = new Button();
-        button.Text = name;
-        if (name == "Upgrade")
-        {
-            button.Pressed += () => {
-                testTower.UpgradeTower();
-            };
-        }
-        else {
-            button.Pressed += () => {
-                testTower.AddModule(name, testTower.size-1);
-            };
-        }
-
-        buildButtonsContainer.AddChild(button);
     }
 
     public void OnNextWaveButtonPressed()
