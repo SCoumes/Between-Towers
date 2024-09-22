@@ -6,6 +6,8 @@ using System.Drawing;
 
 public partial class Tower : Node2D
 {
+	[Export]
+	private Node2D highlight;
 
 	public int size=0;
 	public List<Module> modules = new(); // The size of this should always be equal to size. So the highest module has index size-1
@@ -13,12 +15,24 @@ public partial class Tower : Node2D
 	
 	public override void _Ready()
 	{
+		highlight.Visible = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		var button = Game.game.UpgradeButtonGroup.GetPressedButton();
 
+		if (button == null)
+			return;
+
+		if (((Button)button).Text == "Upgrade" && size != 0)
+		{
+			highlight.Visible = true;
+		} else
+		{
+			highlight.Visible = false;
+		}
 	}
 
 	public void ResetTower()
