@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Waves
 {
-    public static int WaveIndex;
+    public static int WaveIndex = 0;
     private static List<Spawner> spawners = new();
 
     public static void NextWave(){
@@ -108,26 +108,48 @@ public class Waves
             case 4:
                 {
                     var enemies = new List<EnemyTemplate>(); 
-                    for (var i = 0; i < 10; i++) { enemies.Add(EnemyTemplate.BASIC); }
+                    for (var i = 0; i < 20; i++) { enemies.Add(EnemyTemplate.BASIC); }
                     var enemies2 = new List<EnemyTemplate>(); 
-                    for (var i = 0; i < 10; i++) { enemies2.Add(EnemyTemplate.BASIC); }
-                    var enemies3 = new List<EnemyTemplate>(); 
-                    for (var i = 0; i < 10; i++) { enemies3.Add(EnemyTemplate.BASIC); }
-                    return new(){enemies, enemies2, enemies3};
+                    for (var i = 0; i < 20; i++) { enemies2.Add(EnemyTemplate.BASIC); }
+                    return new(){enemies, enemies2};
             }
-            case 15:
+            case 5:
                 {
                     var enemies = new List<EnemyTemplate>(); 
-                    var enemies2 = new List<EnemyTemplate>(); 
-                    for (var i = 0; i < 4; i++) { enemies.Add(EnemyTemplate.BASIC); }
-                    for (var i = 0; i < 2; i++) { enemies2.Add(EnemyTemplate.STRONG); }
+                    for (var i = 0; i < 50; i++) { enemies.Add(EnemyTemplate.BASIC); }
                     return new(){enemies};
+            }
+            case 6:
+                {
+                    var enemies = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 50; i++) { enemies.Add(EnemyTemplate.BASIC); }
+                    return new(){enemies};
+            }
+            case 7:
+                {
+                    var enemies = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 50; i++) { enemies.Add(EnemyTemplate.BASIC); }
+                    var enemies2 = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 4; i++) { enemies.Add(EnemyTemplate.STRONG); }
+                    return new(){enemies, enemies2};
             }
             default:
                 {
-                    var enemies = new List<EnemyTemplate>();
-                    for (var i = 0; i < 50; i++) { enemies.Add(EnemyTemplate.QUICK); }
-                    return new(){enemies};
+                    List<List<EnemyTemplate>> result = new();
+                    for (var i = 0; i < IndexNumber/3; i++)
+                    {
+                        var enemies = new List<EnemyTemplate>();
+                        if (i % 2 == 0)
+                        {
+                            for (var j = 0; j < IndexNumber; j++) { enemies.Add(EnemyTemplate.BASIC); }
+                        }
+                        else
+                        {
+                            for (var j = 0; j < IndexNumber/5; j++) { enemies.Add(EnemyTemplate.STRONG); }
+                        }
+                        result.Add(enemies);
+                    }
+                    return result;
                 }
         }
     }
@@ -143,9 +165,20 @@ public class Waves
             case 3:
                 return new() { new int[2] {300, 400}, new int[2] {800, 900}, new int[2] {500, 600} };
             case 4:
-                return new() { new int[2] {300, 400}, new int[2] {450, 550}, new int[2] {400, 500} };
+                return new() { new int[2] {350, 450}, new int[2] {750, 850}};
+            case 5:
+                return new() { new int[2] {100, 1050} };
+            case 6:
+                return new() { new int[2] {100, 950} };
             default:
-                return new() { new int[2] {100, 800} };
+            {
+                List<int[]> result = new();
+                for (var i = 0; i < IndexNumber/3; i++)
+                {
+                    result.Add(new int[2] {100, 950});
+                }
+                return result;
+            }
         }
     }
 
@@ -160,20 +193,36 @@ public class Waves
             case 3:
                 return 0;
             case 4:
-                return 30;
+                return 0;
+            case 5:
+                return 0;
+            case 6:
+                return 50;
             default:
-                return 2;
+                return 50 - (20 * (WaveIndex%5));
         }
     }
 
+    /// <summary>
+    /// Decides the delay between two consecutive spawners for a given wave.
+    /// </summary>
+    /// <param name="IndexNumber"></param>
+    /// <returns> </returns>
     private static double GetDelay(int IndexNumber){
         switch (IndexNumber)
         {
+            case 1:
+                return 3.0;
+            case 2:
+                return 3.0;
+            case 3:
+                return 3.0;
             case 4:
                 return 6.0;
-
-            default:
+            case 5:
                 return 3.0;
+            default:
+                return 6.0;
         }
     }
 
@@ -188,8 +237,10 @@ public class Waves
         {
             case 3:
                 return 100;
+            case 5:
+                return 150;
             default:
-                return 50;
+                return 100;
         }
     }
 }
