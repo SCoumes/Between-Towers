@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpahamhdsaeto"]
+[gd_scene load_steps=10 format=3 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
 [ext_resource type="PackedScene" uid="uid://d0i4w0tcs6d53" path="res://scenes/ModuleDescriptionPanel.tscn" id="2_qvniw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
 [ext_resource type="Texture2D" uid="uid://3fi2t4833qe3" path="res://assets/princess.png" id="5_knr1t"]
 [ext_resource type="Script" path="res://scripts/VisibleOnScreenNotifier2d.cs" id="6_occff"]
+[ext_resource type="ButtonGroup" uid="uid://cyp50tlpxv5sn" path="res://resources/UpgradeButtons.tres" id="8_p16dp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43gbm"]
 size = Vector2(1153, 59)
@@ -18,6 +19,7 @@ TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("CanvasLayer/Label")
 moduleDescriptionPanel = NodePath("CanvasLayer/ModuleDescriptionPanel")
 buildButtonsContainer = NodePath("CanvasLayer/BuildButtonContainer")
+UpgradeButtonGroup = ExtResource("8_p16dp")
 spawner = NodePath("Spawners/Spawner2")
 testTower = NodePath("Towers/Tower3")
 groundDetection = NodePath("GroundDetection")
@@ -99,5 +101,34 @@ script = ExtResource("5_3rd4u")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetection"]
 position = Vector2(577, 618)
 shape = SubResource("RectangleShape2D_43gbm")
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="Upgrade" type="Button" parent="Buttons"]
+offset_left = 8.0
+offset_top = 80.5
+offset_right = 83.0
+offset_bottom = 111.5
+toggle_mode = true
+button_group = ExtResource("8_p16dp")
+text = "Upgrade"
+
+[node name="Remove module" type="Button" parent="Buttons"]
+offset_left = 8.5
+offset_top = 116.0
+offset_right = 79.5
+offset_bottom = 147.0
+toggle_mode = true
+button_group = ExtResource("8_p16dp")
+text = "Remove"
+
+[node name="Archer" type="Button" parent="Buttons"]
+offset_left = 10.0
+offset_top = 151.5
+offset_right = 78.0
+offset_bottom = 182.5
+toggle_mode = true
+button_group = ExtResource("8_p16dp")
+text = "Archers"
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="OnNextWaveButtonPressed"]

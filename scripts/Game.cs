@@ -15,6 +15,8 @@ public partial class Game : Node2D
     [Export]
     private Container buildButtonsContainer;
     [Export]
+    private ButtonGroup UpgradeButtonGroup;
+    [Export]
     private Spawner spawner;
     [Export]
     private Tower testTower;
@@ -34,7 +36,8 @@ public partial class Game : Node2D
 
     [Export]
     public GroundDetection groundDetection;
-    
+
+    public static Game game;
     public override void _Ready()
     {
         //SetupWaves();
@@ -45,6 +48,7 @@ public partial class Game : Node2D
         SetBuildButton("Archer");
         SetBuildButton("Upgrade");
 
+        game = this;
     }
 
     public override void _Process(double delta)
@@ -94,5 +98,11 @@ public partial class Game : Node2D
         }
     }
 
-
+    public void OnTowerModuleButtonPressed(Tower tower, int moduleIndex)
+    {
+        Button button = UpgradeButtonGroup.GetPressedButton() as Button;
+        tower.OnModuleCliked(button.Text, moduleIndex);
+    }
 }
+
+

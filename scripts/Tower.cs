@@ -11,8 +11,6 @@ public partial class Tower : Node2D
 	public List<Module> modules = new(); // The size of this should always be equal to size. So the highest module has index size-1
 	// Called when the node enters the scene tree for the first time.
 
-	private Game game;
-
  	[Export]
 	private Sprite2D massonry;
 	
@@ -35,8 +33,23 @@ public partial class Tower : Node2D
 		AddModule("Build", size-1);
 	}
 
+	public void OnModuleCliked(String ButtonText, int ModuleIndex){
+		switch (ButtonText){
+			case "Upgrade":
+				UpgradeTower();
+				break;
+			case "Remove":
+				AddModule("Build", ModuleIndex);
+				break;
+			case "Archers":
+				AddModule("Archer", ModuleIndex);
+				break;
+			default:
+				throw new Exception("Invalid button name");
+		}
+	}
+
 	public void AddModule(String ModuleName, int ModuleIndex){
-		// TODO: also check tower size and that the module index is on a build module
 		Module module;
 		int Cost;
 		switch (ModuleName){
@@ -62,6 +75,8 @@ public partial class Tower : Node2D
 		modules[ModuleIndex] = module;
 		AddChild(module);
 		module.Position = ModuleIndex * 32 * Vector2.Up;
+		module.Index = ModuleIndex;
+		module.Tower = this;
 		DrawTower();
 	}
 
