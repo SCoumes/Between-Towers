@@ -146,7 +146,7 @@ public class Waves
             default:
                 {
                     List<List<EnemyTemplate>> result = new();
-                    for (var i = 0; i < IndexNumber/3; i++)
+                    for (var i = 0; i < IndexNumber-4; i++)
                     {
                         var enemies = new List<EnemyTemplate>();
                         if (i % 2 == 0)
@@ -155,7 +155,7 @@ public class Waves
                         }
                         else
                         {
-                            for (var j = 0; j < IndexNumber/5; j++) { enemies.Add(EnemyTemplate.STRONG); }
+                            for (var j = 0; j < 3; j++) { enemies.Add(EnemyTemplate.STRONG); }
                         }
                         result.Add(enemies);
                     }
