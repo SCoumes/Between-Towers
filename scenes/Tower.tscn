@@ -1,14 +1,62 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd8w8tk4kbuf8"]
+[gd_scene load_steps=5 format=4 uid="uid://dd8w8tk4kbuf8"]
 
 [ext_resource type="Script" path="res://scripts/Tower.cs" id="1_6d38i"]
-[ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://assets/tower_masonry.png" id="2_mwwil"]
+[ext_resource type="Texture2D" uid="uid://d4h5rdscmn5v7" path="res://assets/world/Tileset.png" id="2_q2r5p"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vw4r1"]
+texture = ExtResource("2_q2r5p")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_g6btp"]
+sources/0 = SubResource("TileSetAtlasSource_vw4r1")
 
 [node name="Tower" type="Node2D"]
 position = Vector2(-1, -2)
 script = ExtResource("1_6d38i")
 
-[node name="Massonry appearance" type="Sprite2D" parent="."]
-position = Vector2(0, 34)
-scale = Vector2(0.5, 1)
-texture = ExtResource("2_mwwil")
-hframes = 2
+[node name="Massonry appearance" type="TileMapLayer" parent="."]
+position = Vector2(-16, 0)
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAD//wAAAAAFAAMAAAD//wEAAAAFAAQAAAAAAAAAAAAGAAMAAAAAAAEAAAAGAAQAAAABAAAAAAAHAAMAAAABAAEAAAAHAAQAAAA=")
+tile_set = SubResource("TileSet_g6btp")
