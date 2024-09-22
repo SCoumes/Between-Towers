@@ -8,6 +8,8 @@ public partial class Tower : Node2D
 {
 	[Export]
 	private Node2D highlight;
+	[Export]
+	private Node2D modulesComponent;
 
 	public int size=0;
 	public List<Module> modules = new(); // The size of this should always be equal to size. So the highest module has index size-1
@@ -39,6 +41,10 @@ public partial class Tower : Node2D
 	{
 		size = 0;
 		modules.Clear();
+		foreach (var module in modulesComponent.GetChildren())
+		{
+			module.CallDeferred(MethodName.QueueFree);
+		}
 	}
 
 	/// <summary>
@@ -101,7 +107,7 @@ public partial class Tower : Node2D
 		if (OldModule != null) {OldModule.QueueFree();}
 
 		modules[ModuleIndex] = module;
-		AddChild(module);
+		modulesComponent.AddChild(module);
 		module.ZIndex = ModuleIndex;
 		module.Position = ModuleIndex * 32 * Vector2.Up;
 		module.Index = ModuleIndex;
