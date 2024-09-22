@@ -163,6 +163,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="Sky" type="TextureRect" parent="Background"]
 layout_mode = 1
@@ -191,25 +192,20 @@ tile_set = SubResource("TileSet_6jfi1")
 [node name="Towers" type="Node2D" parent="."]
 position = Vector2(1, -47)
 
-[node name="Tower" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
+[node name="Tower" parent="Towers" instance=ExtResource("3_jxpa0")]
 position = Vector2(152, 591)
-massonry = NodePath("Massonry appearance")
 
-[node name="Tower2" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
+[node name="Tower2" parent="Towers" instance=ExtResource("3_jxpa0")]
 position = Vector2(338, 586)
-massonry = NodePath("Massonry appearance")
 
-[node name="Tower3" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
+[node name="Tower3" parent="Towers" instance=ExtResource("3_jxpa0")]
 position = Vector2(578, 585)
-massonry = NodePath("Massonry appearance")
 
-[node name="Tower4" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
+[node name="Tower4" parent="Towers" instance=ExtResource("3_jxpa0")]
 position = Vector2(820, 588)
-massonry = NodePath("Massonry appearance")
 
-[node name="Tower5" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
+[node name="Tower5" parent="Towers" instance=ExtResource("3_jxpa0")]
 position = Vector2(1002, 585)
-massonry = NodePath("Massonry appearance")
 
 [node name="GroundDetection" type="Area2D" parent="."]
 position = Vector2(1, -47)
