@@ -1,17 +1,17 @@
 [gd_scene load_steps=16 format=4 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
-[ext_resource type="Texture2D" uid="uid://brinvsly6ruao" path="res://assets/Golden Coin.png" id="2_g6h03"]
+[ext_resource type="Texture2D" uid="uid://cl8kfexckc7rq" path="res://assets/Golden Coin.png" id="2_g6h03"]
 [ext_resource type="PackedScene" uid="uid://dd8w8tk4kbuf8" path="res://scenes/Tower.tscn" id="3_jxpa0"]
 [ext_resource type="Texture2D" uid="uid://bminxsp1qx683" path="res://assets/world/BG1.png" id="3_sp32k"]
 [ext_resource type="Texture2D" uid="uid://w2bgglw623vk" path="res://assets/ui/Full_Pixel Heart Sprite Sheet 32x32.png" id="4_0n5qc"]
 [ext_resource type="Script" path="res://scripts/Tooltips/Tooltips.cs" id="4_4rmp1"]
 [ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
-[ext_resource type="Texture2D" uid="uid://da6lba30m8mon" path="res://assets/world/BG3.png" id="5_8kr0m"]
-[ext_resource type="Texture2D" uid="uid://d4h5rdscmn5v7" path="res://assets/world/Tileset.png" id="6_u6fb1"]
+[ext_resource type="Texture2D" uid="uid://nmfnhi8ba5f1" path="res://assets/world/BG3.png" id="5_8kr0m"]
+[ext_resource type="Texture2D" uid="uid://b5bkhuixw4h58" path="res://assets/world/Tileset.png" id="6_u6fb1"]
 [ext_resource type="ButtonGroup" uid="uid://cyp50tlpxv5sn" path="res://resources/UpgradeButtons.tres" id="8_p16dp"]
-[ext_resource type="AudioStream" uid="uid://bn1iugnw4bdh4" path="res://assets/music/Goblins_Den_(Regular).wav" id="9_v8y2r"]
-[ext_resource type="AudioStream" uid="uid://2bk5gejwuqtu" path="res://assets/music/Goblins_Dance_(Battle).wav" id="10_oss3c"]
+[ext_resource type="AudioStream" uid="uid://cx5wresd2hel7" path="res://assets/music/Goblins_Den_(Regular).wav" id="9_v8y2r"]
+[ext_resource type="AudioStream" uid="uid://ddl7lx0qmv8ol" path="res://assets/music/Goblins_Dance_(Battle).wav" id="10_oss3c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cu6pa"]
 texture = ExtResource("6_u6fb1")

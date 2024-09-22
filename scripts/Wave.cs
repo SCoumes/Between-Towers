@@ -102,9 +102,9 @@ public class Waves
             case 3:
                 {
                     var enemies = new List<EnemyTemplate>(); 
-                    for (var i = 0; i < 3; i++) { enemies.Add(EnemyTemplate.BASIC); }
+                    for (var i = 0; i < 2; i++) { enemies.Add(EnemyTemplate.BASIC); }
                     var enemies2 = new List<EnemyTemplate>(); 
-                    for (var i = 0; i < 3; i++) { enemies2.Add(EnemyTemplate.BASIC); }
+                    for (var i = 0; i < 2; i++) { enemies2.Add(EnemyTemplate.BASIC); }
                     var enemies3 = new List<EnemyTemplate>(); 
                     for (var i = 0; i < 6; i++) { enemies3.Add(EnemyTemplate.BASIC); }
                     return new(){enemies, enemies2, enemies3};

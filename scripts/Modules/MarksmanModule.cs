@@ -7,7 +7,7 @@ public partial class MarksmanModule : Module
 	public static readonly new int Cost = 50;
 	public readonly new string Name = "Canon";
 
-	private double CoolDown = 0.75;
+	private double CoolDown = 1.5;
 	private double TimeSinceLastShot = 0;
 	private List<Enemy> Enemies = new();
 	private Enemy Target = null;
@@ -29,7 +29,7 @@ public partial class MarksmanModule : Module
 
 		if (Target is null) _findTarget();
 		if (Target is null) return;
-		Target.Damage(20);
+		Target.Damage(10);
 		TimeSinceLastShot = 0;
 	}
 

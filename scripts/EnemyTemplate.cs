@@ -27,7 +27,7 @@ public class EnemyTemplate
     public static readonly EnemyTemplate STRONG = new()
     {
         MaxHP = 25,
-        Speed = 30,
+        Speed = 100,
         HPCost = 1,
         GoldValue = 5
     };
