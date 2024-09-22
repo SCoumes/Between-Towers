@@ -143,7 +143,7 @@ public class Waves
             case 3:
                 return new() { new int[2] {300, 400}, new int[2] {800, 900}, new int[2] {500, 600} };
             case 4:
-                return new() { new int[2] {500, 600}, new int[2] {550, 650}, new int[2] {600, 700} };
+                return new() { new int[2] {300, 400}, new int[2] {450, 550}, new int[2] {400, 500} };
             default:
                 return new() { new int[2] {100, 800} };
         }

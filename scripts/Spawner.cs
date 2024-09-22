@@ -54,6 +54,12 @@ public partial class Spawner : Node2D
             return;
         }
 
+        if ((Position.X < minRange -100 && SpawnerSpeed < 0)  || (Position.X > maxRange + 100 && SpawnerSpeed > 0))
+        {
+            exitedScreen();
+            return;
+        }
+
         if (Position.X < minRange || Position.X > maxRange)
         {
             return;
