@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d17juc1h4mgb4"]
+[gd_scene load_steps=9 format=3 uid="uid://cr8pnyb2fqal"]
 
-[ext_resource type="Texture2D" uid="uid://86fn652l7j55" path="res://assets/tower_masonry.png" id="1_kqpf7"]
+[ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://assets/tower_masonry.png" id="1_kqpf7"]
 [ext_resource type="Script" path="res://scripts/Modules/MarksmanModule.cs" id="1_wnott"]
-[ext_resource type="Texture2D" uid="uid://dgjvda63q04ay" path="res://assets/full_tower_base.png" id="3_8fedr"]
-[ext_resource type="Texture2D" uid="uid://cmtg7tm6qd6sl" path="res://assets/canon.png" id="3_nq12j"]
+[ext_resource type="Texture2D" uid="uid://dsqyq4dr3b75s" path="res://assets/full_tower_base.png" id="3_8fedr"]
+[ext_resource type="Texture2D" uid="uid://bm304m623u2tw" path="res://assets/canon.png" id="3_nq12j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qdnv3"]
 texture = ExtResource("1_kqpf7")
@@ -19,7 +19,7 @@ sources/1 = SubResource("TileSetAtlasSource_qdnv3")
 size = Vector2(30, 29)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vl0qu"]
-radius = 373.193
+radius = 309.002
 
 [node name="Marksman" type="Node2D"]
 script = ExtResource("1_wnott")

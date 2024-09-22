@@ -67,14 +67,17 @@ public partial class Spawner : Node2D
 
         durationLeft = SpawnDuration;
 
-        var enemy = EnemyScene.Instantiate<Enemy>();
-        enemy.Template = enemiesToSpawn.Pop();
-        Game.game.EnemiesComponent.AddChild(enemy);
-        Game.ActiveEnemies++;
-        enemy.Position = Position;
-
-        if (enemiesToSpawn.Count == 0)
+        if (enemiesToSpawn.Count == 0){
             LeaveScreenNow = true;
+        } else {
+            var enemy = EnemyScene.Instantiate<Enemy>();
+            enemy.Template = enemiesToSpawn.Pop();
+            Game.game.EnemiesComponent.AddChild(enemy);
+            Game.ActiveEnemies++;
+            enemy.Position = Position;
+        }
+
+        
     }
 
     public void exitedScreen(){
