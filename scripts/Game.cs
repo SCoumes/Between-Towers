@@ -64,6 +64,11 @@ public partial class Game : Node
     private Label playerHealthLabel;
     [Export]
     private Control gameOverDisplay;
+    [Export]
+    private Control gameWonDisplay;
+    [Export]
+    public Label CurrentWaveLabel;
+
 
     public int PlayerHealth{
         get => playerHealth;
@@ -130,6 +135,16 @@ public partial class Game : Node
         tower.OnModuleCliked(button.Text, moduleIndex);
     }
 
+    public void GameWon()
+    {
+        gameWonDisplay.Visible = true;
+    }
+
+    public void InfiniteMode()
+    {
+        gameWonDisplay.Visible = false;
+    }
+
     public void GameOver()
     {
         gameOverDisplay.Visible = true;
@@ -148,6 +163,7 @@ public partial class Game : Node
     public void StartGame()
     {
         gameOverDisplay.Visible = false;
+        gameWonDisplay.Visible = false;
 
         Gold = 30;
         PlayerHealth = 15;

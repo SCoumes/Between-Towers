@@ -25,6 +25,11 @@ public class Waves
     public static void EndWave(){
         _cleanSpawners();
         _towerUlocks(WaveIndex);
+
+        Game.game.CurrentWaveLabel.Text = WaveIndex.ToString() + "/10";
+
+        if (WaveIndex == 10)
+            Game.game.GameWon();
     }
 
     /// <summary>
