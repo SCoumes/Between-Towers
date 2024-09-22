@@ -13,7 +13,7 @@ public partial class Game : Node
     [Export]
     private Container buildButtonsContainer;
     [Export]
-    private ButtonGroup UpgradeButtonGroup;
+    public ButtonGroup UpgradeButtonGroup;
     /*[Export]
     private Spawner spawner;*/
     [Export]

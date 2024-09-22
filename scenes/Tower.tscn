@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://dd8w8tk4kbuf8"]
+[gd_scene load_steps=6 format=4 uid="uid://dd8w8tk4kbuf8"]
 
 [ext_resource type="Script" path="res://scripts/Tower.cs" id="1_6d38i"]
-[ext_resource type="Texture2D" uid="uid://b5bkhuixw4h58" path="res://assets/world/Tileset.png" id="2_q2r5p"]
+[ext_resource type="Texture2D" uid="uid://d4h5rdscmn5v7" path="res://assets/world/Tileset.png" id="2_q2r5p"]
+[ext_resource type="Texture2D" uid="uid://clivforesqoil" path="res://assets/ui/01.png" id="3_kb7i1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vw4r1"]
 texture = ExtResource("2_q2r5p")
@@ -51,12 +52,19 @@ texture = ExtResource("2_q2r5p")
 [sub_resource type="TileSet" id="TileSet_g6btp"]
 sources/0 = SubResource("TileSetAtlasSource_vw4r1")
 
-[node name="Tower" type="Node2D"]
+[node name="Tower" type="Node2D" node_paths=PackedStringArray("highlight")]
 position = Vector2(-1, -2)
 script = ExtResource("1_6d38i")
+highlight = NodePath("Highlight")
 
 [node name="Massonry appearance" type="TileMapLayer" parent="."]
 position = Vector2(-16, 0)
 scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAD//wAAAAAFAAMAAAD//wEAAAAFAAQAAAAAAAAAAAAGAAMAAAAAAAEAAAAGAAQAAAABAAAAAAAHAAMAAAABAAEAAAAHAAQAAAA=")
 tile_set = SubResource("TileSet_g6btp")
+
+[node name="Highlight" type="Sprite2D" parent="."]
+z_index = 4096
+position = Vector2(0, 8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_kb7i1")
