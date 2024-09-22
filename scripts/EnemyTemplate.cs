@@ -7,6 +7,7 @@ public class EnemyTemplate
     public float Speed;
     public int HPCost;
     public int GoldValue;
+    public Color Modulate = Colors.White;
 
     public static readonly EnemyTemplate BASIC = new()
     {
@@ -29,6 +30,7 @@ public class EnemyTemplate
         MaxHP = 25,
         Speed = 100,
         HPCost = 1,
-        GoldValue = 5
+        GoldValue = 5,
+        Modulate = Colors.Red,
     };
 }
