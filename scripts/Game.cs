@@ -82,7 +82,6 @@ public partial class Game : Node
         game = this;
 
         StartGame();
-        tower3.UpgradeTower();
     }
 
     public override void _Process(double delta)
@@ -152,6 +151,16 @@ public partial class Game : Node
 
         Gold = 30;
         PlayerHealth = 15;
+
+        Waves.WaveIndex = 0;
+
+        tower1.ResetTower();
+        tower2.ResetTower();
+        tower3.ResetTower();
+        tower4.ResetTower();
+        tower5.ResetTower();
+
+        tower3.UpgradeTower();
 
         buildupMusicPlayer.Play();
     }

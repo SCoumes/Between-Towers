@@ -4,27 +4,27 @@ using System.Collections.Generic;
 
 public class Waves
 {
-    private static int waveIndex = 3;
+    public static int WaveIndex;
     private static List<Spawner> spawners = new();
 
     public static void NextWave(){
-        waveIndex += 1;
-        List<List<EnemyTemplate>> EnemiesLists = _GetEnemies(waveIndex);
-        List<int[]> Ranges = _getRanges(waveIndex); // Same toplevel list size as EnemiesLists, each array has 2 elements
+        WaveIndex += 1;
+        List<List<EnemyTemplate>> EnemiesLists = _GetEnemies(WaveIndex);
+        List<int[]> Ranges = _getRanges(WaveIndex); // Same toplevel list size as EnemiesLists, each array has 2 elements
         double delay = 0.0;
         GD.Print(EnemiesLists);
         foreach (var enemies in EnemiesLists)
         {
             GD.Print(enemies);
             _SpawnDragon(enemies, Ranges[EnemiesLists.IndexOf(enemies)], delay);
-            delay += GetDelay(waveIndex);
+            delay += GetDelay(WaveIndex);
         }
         _SetWind();
     }
 
     public static void EndWave(){
         _cleanSpawners();
-        _towerUlocks(waveIndex);
+        _towerUlocks(WaveIndex);
     }
 
     /// <summary>
@@ -151,7 +151,7 @@ public class Waves
 
     private static int getWindSpeed()
     {
-        switch (waveIndex)
+        switch (WaveIndex)
         {
             case 1:
                 return 0;
@@ -184,7 +184,7 @@ public class Waves
 
     public static int getSpawnerSpeed()
     {
-        switch (waveIndex)
+        switch (WaveIndex)
         {
             case 3:
                 return 100;
