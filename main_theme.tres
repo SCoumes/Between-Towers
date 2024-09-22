@@ -28,6 +28,9 @@ texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
 [resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/styles/focus = SubResource("StyleBoxEmpty_3wu4n")
 Button/styles/hover = SubResource("StyleBoxTexture_o0rme")
 Button/styles/normal = SubResource("StyleBoxTexture_oayon")
