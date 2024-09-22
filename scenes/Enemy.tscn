@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bu4adano4p0cm"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_rl4h8"]
-[ext_resource type="Texture2D" uid="uid://dkfahxh38ka3b" path="res://assets/goblin-chute-sprites.png" id="2_m8x4i"]
+[ext_resource type="Texture2D" uid="uid://y8crw0p5k80t" path="res://assets/goblin-chute-sprites.png" id="2_m8x4i"]
 [ext_resource type="Script" path="res://scripts/VisibleOnScreenNotifier2d.cs" id="3_ehcne"]
 
 [sub_resource type="Animation" id="Animation_7781f"]

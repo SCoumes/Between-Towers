@@ -1,17 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://qw1ko0jqjnda"]
+[gd_scene load_steps=7 format=3 uid="uid://qw1ko0jqjnda"]
 
 [ext_resource type="Script" path="res://scripts/Spawner.cs" id="1_y006g"]
-[ext_resource type="Texture2D" uid="uid://3fi2t4833qe3" path="res://assets/princess.png" id="2_xiuo7"]
+[ext_resource type="Texture2D" uid="uid://fsa20t1jeudb" path="res://assets/dragon-sprite-frames.png" id="2_tgbs8"]
 [ext_resource type="Script" path="res://scripts/VisibleOnScreenNotifier2d.cs" id="3_jt5vw"]
 
-[node name="Spawner" type="Node2D"]
-position = Vector2(6, 6)
+[sub_resource type="Animation" id="Animation_6v1id"]
+resource_name = "fly"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ln5oq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j6iio"]
+_data = {
+"RESET": SubResource("Animation_ln5oq"),
+"fly": SubResource("Animation_6v1id")
+}
+
+[node name="Spawner" type="Node2D" node_paths=PackedStringArray("animationPlayer")]
 script = ExtResource("1_y006g")
 Active = false
+animationPlayer = NodePath("Sprite2D/AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(22, 35)
-texture = ExtResource("2_xiuo7")
+position = Vector2(0, -8)
+texture = ExtResource("2_tgbs8")
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_j6iio")
+}
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 script = ExtResource("3_jt5vw")

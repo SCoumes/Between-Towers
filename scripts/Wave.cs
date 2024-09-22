@@ -64,6 +64,7 @@ public class Waves
         PackedScene SceneOfSpawner = GD.Load<PackedScene>("res://scenes/Spawner.tscn");
         var spawner = SceneOfSpawner.Instantiate<Spawner>();
         Game.game.AddChild(spawner);
+        spawner.StartingPosition = new Vector2(10, 30);
         spawner.game = Game.game;
         spawner.SetWave(enemies, min, max);
         spawners.Add(spawner);

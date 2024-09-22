@@ -14,8 +14,8 @@ public partial class Game : Node2D
     private Container buildButtonsContainer;
     [Export]
     private ButtonGroup UpgradeButtonGroup;
-    [Export]
-    private Spawner spawner;
+    /*[Export]
+    private Spawner spawner;*/
     [Export]
     private Tower testTower;
 
