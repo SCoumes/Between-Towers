@@ -24,7 +24,6 @@ public class Waves
 
     private static void _towerUlocks(int IndexNumber)
     {
-        GD.Print("Unlocking towers", IndexNumber);
         switch (IndexNumber)
         {
             case 3:
@@ -103,7 +102,7 @@ public class Waves
         switch (IndexNumber)
         {
             case 1:
-                return new() { new int[2] {100, 800} };
+                return new() { new int[2] {500, 600} };
             case 2:
                 return new() { new int[2] {100, 800} };
             default:
@@ -116,7 +115,7 @@ public class Waves
         switch (waveIndex)
         {
             case 1:
-                return Vector2.Left ;
+                return Vector2.Zero;
             case 2:
                 return Vector2.Right;
             default:

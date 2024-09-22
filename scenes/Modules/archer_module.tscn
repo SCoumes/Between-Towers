@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://mpgip13sc7r5"]
+[gd_scene load_steps=8 format=3 uid="uid://mpgip13sc7r5"]
 
 [ext_resource type="Script" path="res://scripts/Modules/ArcherModule.cs" id="1_iwbbh"]
 [ext_resource type="Texture2D" uid="uid://dgk7c4lk46xdq" path="res://assets/archer.png" id="1_ubgvl"]
@@ -17,6 +17,9 @@ sources/1 = SubResource("TileSetAtlasSource_0prpy")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3sjj6"]
 size = Vector2(30, 29)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6p2i2"]
+radius = 213.15
+
 [node name="ArcherModule" type="Node2D"]
 script = ExtResource("1_iwbbh")
 
@@ -28,10 +31,16 @@ tile_set = SubResource("TileSet_5qxph")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ubgvl")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="ClickDetection" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickDetection"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_3sjj6")
 
-[connection signal="input_event" from="Area2D" to="." method="OnClick"]
+[node name="EnemyDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetection"]
+shape = SubResource("CircleShape2D_6p2i2")
+debug_color = Color(0.886363, 0.308157, 0.319404, 0.42)
+
+[connection signal="input_event" from="ClickDetection" to="." method="OnClick"]

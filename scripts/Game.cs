@@ -73,7 +73,6 @@ public partial class Game : Node2D
         if (waveInProgress && ActiveEnemies == 0 && Waves.DoneSpawning())
         {
             Waves.EndWave();
-            GD.Print("Wave finished !");
             Gold += 10;
             waveInProgress = false;
         }
