@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpahamhdsaeto"]
+[gd_scene load_steps=7 format=3 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
+[ext_resource type="Texture2D" uid="uid://brinvsly6ruao" path="res://assets/Golden Coin.png" id="2_g6h03"]
 [ext_resource type="PackedScene" uid="uid://dd8w8tk4kbuf8" path="res://scenes/Tower.tscn" id="3_jxpa0"]
 [ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
 [ext_resource type="ButtonGroup" uid="uid://cyp50tlpxv5sn" path="res://resources/UpgradeButtons.tres" id="8_p16dp"]
@@ -12,7 +13,7 @@ size = Vector2(1153, 59)
 scale = Vector2(2, 2)
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
-GoldCounter = NodePath("CanvasLayer/Label")
+GoldCounter = NodePath("CanvasLayer/HBoxContainer/Label")
 buildButtonsContainer = NodePath("CanvasLayer/BuildButtonContainer")
 groundDetection = NodePath("GroundDetection")
 tower1 = NodePath("Towers/Tower")
@@ -22,15 +23,6 @@ tower4 = NodePath("Towers/Tower4")
 tower5 = NodePath("Towers/Tower5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 7.0
-offset_top = 34.0
-offset_right = 17.0
-offset_bottom = 57.0
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="BuildButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 2
@@ -48,6 +40,21 @@ offset_top = -2.0
 offset_right = 108.0
 offset_bottom = 29.0
 text = "NEXT_PHASE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_top = 29.0
+offset_right = 40.0
+offset_bottom = 52.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_g6h03")
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Towers" type="Node2D" parent="."]
 
