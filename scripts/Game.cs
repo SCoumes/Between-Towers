@@ -67,6 +67,8 @@ public partial class Game : Node
     [Export]
     private Control gameWonDisplay;
     [Export]
+    private Control welcomeMessageDisplay;
+    [Export]
     public Label CurrentWaveLabel;
 
 
@@ -159,8 +161,14 @@ public partial class Game : Node
         GD.Print("Game Over");
     }
 
+    public void HideWelcomeMessage()
+    {
+        welcomeMessageDisplay.Visible = false;
+    }
+
     public void StartGame()
     {
+        welcomeMessageDisplay.Visible = true;
         gameOverDisplay.Visible = false;
         gameWonDisplay.Visible = false;
 
