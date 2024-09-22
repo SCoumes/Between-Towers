@@ -9,6 +9,7 @@ public class Waves
 
     public static void NextWave(){
         WaveIndex += 1;
+        _SetWind(WaveIndex); // Set the wind for the starting wave. Redundant il all waves but the first.
         List<List<EnemyTemplate>> EnemiesLists = _GetEnemies(WaveIndex);
         List<int[]> Ranges = _getRanges(WaveIndex); // Same toplevel list size as EnemiesLists, each array has 2 elements
         double delay = 0.0;
@@ -21,7 +22,7 @@ public class Waves
 
     public static void EndWave(){
         Game.Gold += 25;
-        _SetWind(); // Set the wind for next wave
+        _SetWind(WaveIndex+1); // Set the wind for next wave
         _cleanSpawners();
         _towerUlocks(WaveIndex);
 
@@ -29,6 +30,11 @@ public class Waves
 
         if (WaveIndex == 10)
             Game.game.GameWon();
+    }
+
+    public static void StartGame(){
+        WaveIndex = 0;
+        Game.game.CurrentWaveLabel.Text = WaveIndex.ToString() + "/10";
     }
 
     /// <summary>
@@ -61,9 +67,9 @@ public class Waves
         spawners.Add(spawner);
     }
 
-    private static void _SetWind()
+    private static void _SetWind(int WaveIndex)
     {
-        Game.game.WindValue.Text = getWindSpeed(WaveIndex+1).ToString();
+        Game.game.WindValue.Text = getWindSpeed(WaveIndex).ToString();
     }
     private static void _towerUlocks(int IndexNumber)
     {
