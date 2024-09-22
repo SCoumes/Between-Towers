@@ -36,7 +36,7 @@ public partial class Game : Node2D
     public GroundDetection groundDetection;
 
     [Export]
-    public RichTextLabel WindValue;
+    public Label WindValue;
 
     [Export]
     public Tower tower1;

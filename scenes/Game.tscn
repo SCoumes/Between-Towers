@@ -12,12 +12,12 @@ size = Vector2(1153, 59)
 [node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "groundDetection", "WindValue", "tower1", "tower2", "tower3", "tower4", "tower5")]
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
-GoldCounter = NodePath("GUI/HBoxContainer/Label")
+GoldCounter = NodePath("GUI/GoldDisplay/Label")
 buildButtonsContainer = NodePath("GUI/BuildButtonContainer")
 UpgradeButtonGroup = ExtResource("8_p16dp")
 testTower = NodePath("Towers/Tower3")
 groundDetection = NodePath("GroundDetection")
-WindValue = NodePath("Wind display/Value")
+WindValue = NodePath("GUI/WindDisplay/VBoxContainer/Label2")
 tower1 = NodePath("Towers/Tower")
 tower2 = NodePath("Towers/Tower2")
 tower3 = NodePath("Towers/Tower3")
@@ -43,36 +43,38 @@ offset_right = 108.0
 offset_bottom = 29.0
 text = "NEXT_PHASE"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
-offset_top = 29.0
-offset_right = 40.0
-offset_bottom = 52.0
+[node name="GoldDisplay" type="HBoxContainer" parent="GUI"]
+offset_left = 965.0
+offset_top = 39.0
+offset_right = 1011.0
+offset_bottom = 71.0
 
-[node name="TextureRect" type="TextureRect" parent="GUI/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="GUI/GoldDisplay"]
 layout_mode = 2
 texture = ExtResource("2_g6h03")
 
-[node name="Label" type="Label" parent="GUI/HBoxContainer"]
+[node name="Label" type="Label" parent="GUI/GoldDisplay"]
 layout_mode = 2
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="GUI"]
-offset_left = 151.0
-offset_right = 215.0
-offset_bottom = 48.0
+[node name="WindDisplay" type="PanelContainer" parent="GUI"]
+offset_left = 1028.0
+offset_top = 7.0
+offset_right = 1138.0
+offset_bottom = 105.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/WindDisplay"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="GUI/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="GUI/WindDisplay/VBoxContainer"]
 layout_mode = 2
 text = "WIND"
 
-[node name="Label2" type="Label" parent="GUI/PanelContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="GUI/WindDisplay/VBoxContainer"]
 layout_mode = 2
-text = "TODO"
+horizontal_alignment = 1
 
 [node name="Towers" type="Node2D" parent="."]
 
@@ -134,6 +136,7 @@ button_group = ExtResource("8_p16dp")
 text = "Archers"
 
 [node name="Wind display" type="Node2D" parent="."]
+position = Vector2(-651, 187)
 
 [node name="Label" type="RichTextLabel" parent="Wind display"]
 offset_left = 1016.0
