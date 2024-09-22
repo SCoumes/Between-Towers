@@ -1,17 +1,17 @@
 [gd_scene load_steps=16 format=4 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
-[ext_resource type="Texture2D" uid="uid://cl8kfexckc7rq" path="res://assets/Golden Coin.png" id="2_g6h03"]
+[ext_resource type="Texture2D" uid="uid://brinvsly6ruao" path="res://assets/Golden Coin.png" id="2_g6h03"]
 [ext_resource type="PackedScene" uid="uid://dd8w8tk4kbuf8" path="res://scenes/Tower.tscn" id="3_jxpa0"]
 [ext_resource type="Texture2D" uid="uid://bminxsp1qx683" path="res://assets/world/BG1.png" id="3_sp32k"]
 [ext_resource type="Texture2D" uid="uid://w2bgglw623vk" path="res://assets/ui/Full_Pixel Heart Sprite Sheet 32x32.png" id="4_0n5qc"]
 [ext_resource type="Script" path="res://scripts/Tooltips/Tooltips.cs" id="4_4rmp1"]
 [ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
-[ext_resource type="Texture2D" uid="uid://nmfnhi8ba5f1" path="res://assets/world/BG3.png" id="5_8kr0m"]
-[ext_resource type="Texture2D" uid="uid://b5bkhuixw4h58" path="res://assets/world/Tileset.png" id="6_u6fb1"]
+[ext_resource type="Texture2D" uid="uid://da6lba30m8mon" path="res://assets/world/BG3.png" id="5_8kr0m"]
+[ext_resource type="Texture2D" uid="uid://d4h5rdscmn5v7" path="res://assets/world/Tileset.png" id="6_u6fb1"]
 [ext_resource type="ButtonGroup" uid="uid://cyp50tlpxv5sn" path="res://resources/UpgradeButtons.tres" id="8_p16dp"]
-[ext_resource type="AudioStream" uid="uid://cx5wresd2hel7" path="res://assets/music/Goblins_Den_(Regular).wav" id="9_v8y2r"]
-[ext_resource type="AudioStream" uid="uid://ddl7lx0qmv8ol" path="res://assets/music/Goblins_Dance_(Battle).wav" id="10_oss3c"]
+[ext_resource type="AudioStream" uid="uid://bn1iugnw4bdh4" path="res://assets/music/Goblins_Den_(Regular).wav" id="9_v8y2r"]
+[ext_resource type="AudioStream" uid="uid://2bk5gejwuqtu" path="res://assets/music/Goblins_Dance_(Battle).wav" id="10_oss3c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cu6pa"]
 texture = ExtResource("6_u6fb1")
@@ -64,7 +64,7 @@ sources/0 = SubResource("TileSetAtlasSource_cu6pa")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43gbm"]
 size = Vector2(1153, 59)
 
-[node name="Game" type="Node" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "EnemiesComponent", "groundDetection", "WindValue", "tower1", "tower2", "tower3", "tower4", "tower5", "buildupMusicPlayer", "battleMusicPlayer", "playerHealthLabel", "gameOverDisplay")]
+[node name="Game" type="Node" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "EnemiesComponent", "groundDetection", "WindValue", "tower1", "tower2", "tower3", "tower4", "tower5", "buildupMusicPlayer", "battleMusicPlayer", "playerHealthLabel", "gameOverDisplay", "gameWonDisplay", "CurrentWaveLabel")]
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("GUI/GoldDisplay/Label")
@@ -83,6 +83,8 @@ buildupMusicPlayer = NodePath("Music/Buildup")
 battleMusicPlayer = NodePath("Music/Battle")
 playerHealthLabel = NodePath("GUI/HealthBar/Label")
 gameOverDisplay = NodePath("GUI/GameOverDisplay")
+gameWonDisplay = NodePath("GUI/GameWonDisplay")
+CurrentWaveLabel = NodePath("GUI/Wavecount/VBoxContainer/Label2")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -175,16 +177,38 @@ button_group = ExtResource("8_p16dp")
 text = "Canons"
 script = ExtResource("4_4rmp1")
 
+[node name="Wavecount" type="PanelContainer" parent="GUI"]
+offset_right = 64.0
+offset_bottom = 48.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Wavecount"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/Wavecount/VBoxContainer"]
+layout_mode = 2
+text = "WAVE"
+
+[node name="Label2" type="Label" parent="GUI/Wavecount/VBoxContainer"]
+layout_mode = 2
+text = "0/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HealthBar" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_left = 20.0
+offset_top = 99.0
+offset_right = 84.0
+offset_bottom = 163.0
 
 [node name="TextureRect" type="TextureRect" parent="GUI/HealthBar"]
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 64.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("4_0n5qc")
 
 [node name="Label" type="Label" parent="GUI/HealthBar"]
@@ -223,6 +247,42 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Retry"
+
+[node name="GameWonDisplay" type="CenterContainer" parent="GUI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/GameWonDisplay"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/GameWonDisplay/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/GameWonDisplay/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Congratulations ! You repelled the goblins and saved the kingdom!"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/GameWonDisplay/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GUI/GameWonDisplay/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Retry"
+
+[node name="Button2" type="Button" parent="GUI/GameWonDisplay/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "INFINITE MODE ?"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 3
@@ -297,3 +357,5 @@ stream = ExtResource("10_oss3c")
 
 [connection signal="pressed" from="GUI/Button" to="." method="OnNextWaveButtonPressed"]
 [connection signal="pressed" from="GUI/GameOverDisplay/PanelContainer/VBoxContainer/HBoxContainer/RetryButton" to="." method="StartGame"]
+[connection signal="pressed" from="GUI/GameWonDisplay/PanelContainer/VBoxContainer/HBoxContainer/Button" to="." method="StartGame"]
+[connection signal="pressed" from="GUI/GameWonDisplay/PanelContainer/VBoxContainer/HBoxContainer/Button2" to="." method="InfiniteMode"]

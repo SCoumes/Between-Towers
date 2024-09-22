@@ -88,6 +88,7 @@ public partial class Tower : Node2D
 
 		modules[ModuleIndex] = module;
 		AddChild(module);
+		module.ZIndex = ModuleIndex;
 		module.Position = ModuleIndex * 32 * Vector2.Up;
 		module.Index = ModuleIndex;
 		module.Tower = this;

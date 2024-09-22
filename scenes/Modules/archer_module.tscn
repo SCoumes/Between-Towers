@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://mpgip13sc7r5"]
+[gd_scene load_steps=9 format=3 uid="uid://mpgip13sc7r5"]
 
 [ext_resource type="Script" path="res://scripts/Modules/ArcherModule.cs" id="1_iwbbh"]
-[ext_resource type="Texture2D" uid="uid://dgk7c4lk46xdq" path="res://assets/archer.png" id="1_ubgvl"]
-[ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://assets/tower_masonry.png" id="2_loi5x"]
+[ext_resource type="Texture2D" uid="uid://cdgnppkpt1sc0" path="res://assets/archer.png" id="1_ubgvl"]
+[ext_resource type="Texture2D" uid="uid://86fn652l7j55" path="res://assets/tower_masonry.png" id="2_loi5x"]
+[ext_resource type="Texture2D" uid="uid://dgjvda63q04ay" path="res://assets/full_tower_base.png" id="3_0ofcx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vfyrw"]
 texture = ExtResource("2_loi5x")
@@ -24,9 +25,14 @@ radius = 213.15
 script = ExtResource("1_iwbbh")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+visible = false
 position = Vector2(-8, -8)
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_5qxph")
+
+[node name="Masonry" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("3_0ofcx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ubgvl")
