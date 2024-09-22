@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-public partial class Game : Node2D
+public partial class Game : Node
 {
     [Export]
     public Node2D TowersComponent;
