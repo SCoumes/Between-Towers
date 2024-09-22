@@ -149,14 +149,8 @@ public class Waves
                     for (var i = 0; i < IndexNumber-4; i++)
                     {
                         var enemies = new List<EnemyTemplate>();
-                        if (i % 2 == 0)
-                        {
-                            for (var j = 0; j < IndexNumber; j++) { enemies.Add(EnemyTemplate.BASIC); }
-                        }
-                        else
-                        {
-                            for (var j = 0; j < 3; j++) { enemies.Add(EnemyTemplate.STRONG); }
-                        }
+                        for (var j = 0; j < IndexNumber; j++) { enemies.Add(EnemyTemplate.BASIC); }
+                        for (var j = 0; j < 3; j++) { enemies.Add(EnemyTemplate.STRONG); }
                         result.Add(enemies);
                     }
                     return result;
@@ -180,6 +174,8 @@ public class Waves
                 return new() { new int[2] {100, 1050} };
             case 6:
                 return new() { new int[2] {100, 950} };
+            case 7:
+                return new() { new int[2] {300, 950}, new int[2] {300, 950} };
             default:
             {
                 List<int[]> result = new();
@@ -232,7 +228,7 @@ public class Waves
             case 5:
                 return 3.0;
             default:
-                return 6.0;
+                return 3.0;
         }
     }
 
