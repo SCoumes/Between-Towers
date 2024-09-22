@@ -1,13 +1,14 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 
 public partial class Tower : Node2D
 {
 
-	public int size;
-	public List<TowerModule> modules; // The size of this should always be equal to size
+	public int size=0;
+	public List<Module> modules = new(); // The size of this should always be equal to size. So the highest module has index size-1
 	// Called when the node enters the scene tree for the first time.
 
 	private Game game;
@@ -29,42 +30,42 @@ public partial class Tower : Node2D
 	/// </summary>
 	public void UpgradeTower(){
 		//upgrade tower
+		size++;
+		modules.Add(null);
+		AddModule("Build", size-1);
 	}
 
 	public void AddModule(String ModuleName, int ModuleIndex){
 		// TODO: also check tower size and that the module index is on a build module
-		TowerModule module;
+		Module module;
+		int Cost;
 		switch (ModuleName){
+			case "Build":
+				PackedScene ModuleScene = GD.Load<PackedScene>("res://scenes/Modules/build_module.tscn");
+				module = ModuleScene.Instantiate<BuildModule>();
+				Cost = BuildModule.Cost;
+				break;
 			case "Archer":
-				module = new TowerModule.ArcherModule();
-				break;
-			case "Marksman":
-				module = new TowerModule.MarksmanModule();
-				break;
-			case "Cannon":
-				module = new TowerModule.CannonModule();
-				break;
-			case "Magic":
-				module = new TowerModule.MagicModule();
+				PackedScene ArcherScene = GD.Load<PackedScene>("res://scenes/Modules/archer_module.tscn");
+				module = ArcherScene.Instantiate<ArcherModule>();
+				Cost = ArcherModule.Cost;
 				break;
 			default:
 				throw new Exception("Invalid module name");
 		}
-		if (Game.Gold < 5) {return;} // TODO: Change this to the actual cost of the module
-		modules.Add(module);
-		Game.Gold -= 5; // TODO: Change this to the actual cost of the module
-		
-		var shooter = ShooterScene.Instantiate<Shooter>();
-        shooter.Position = masonryLayer.MapToLocal(moduleCoordinates) + masonryLayer.Position;
-        shooter.Module = module;
-        shooters.AddChild(shooter);
-        shooter.SetDetectionRadius(module.Radius);
+		if (Game.Gold < Cost) {return;} 
+		Game.Gold -= Cost; 
 
+		Module OldModule = modules[ModuleIndex]; // If we are just upgrading, this will be null
+		if (OldModule != null) {OldModule.QueueFree();}
+
+		modules[ModuleIndex] = module;
+		AddChild(module);
+		module.Position = ModuleIndex * 32 * Vector2.Up;
 		DrawTower();
 	}
 
 	public void DrawTower(){
 		//draw tower
-
 	}
 }

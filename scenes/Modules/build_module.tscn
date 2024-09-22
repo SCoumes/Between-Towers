@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://di6aaaeylh2f8"]
+
+[ext_resource type="Script" path="res://scripts/Modules/BuildModule.cs" id="1_47trx"]
+[ext_resource type="Texture2D" uid="uid://cp8tkjhbi7phx" path="res://assets/core.png" id="1_vavrs"]
+[ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://assets/tower_masonry.png" id="2_vmkh5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssbvy"]
+texture = ExtResource("2_vmkh5")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lnrh5"]
+sources/1 = SubResource("TileSetAtlasSource_ssbvy")
+
+[node name="BuildModule" type="Node2D"]
+script = ExtResource("1_47trx")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(-8, -8)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_lnrh5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_vavrs")

@@ -11,10 +11,9 @@ public partial class ModuleDescriptionPanel : PanelContainer
     [Export]
     Label moduleLevelLabel;
 
-    public void SetModuleDescription(TowerModule module)
+    public void SetModuleDescription(Module module)
     {
         moduleNameLabel.Text = module.Name;
-        moduleLevelLabel.Text = module.Level.ToString();
     }
 
     public void OnUpgradeButtonPressed()

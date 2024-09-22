@@ -16,6 +16,8 @@ public partial class Game : Node2D
     private Container buildButtonsContainer;
     [Export]
     private Spawner spawner;
+    [Export]
+    private Tower testTower;
 
     public static int Gold
     {
@@ -23,16 +25,8 @@ public partial class Game : Node2D
         set { dirtyGold = true; gold = value; }
     }
 
-    public static TowerModule FocusModule
-    {
-        get => focusModule;
-        set { dirtyModule = true; focusModule = value; }
-    }
-
     private static int gold = 999;
     private static bool dirtyGold = true;
-    private static TowerModule focusModule = null;
-    private static bool dirtyModule = false;
 
     private static bool waveInProgress = false;
 
@@ -47,10 +41,9 @@ public partial class Game : Node2D
 
         Waves.game = this;
 
-        SetBuildButton(new TowerModule.ArcherModule());
-        SetBuildButton(new TowerModule.MarksmanModule());
-        SetBuildButton(new TowerModule.CannonModule());
-        SetBuildButton(new TowerModule.MagicModule());
+        SetBuildButton("Build");
+        SetBuildButton("Archer");
+        SetBuildButton("Upgrade");
 
     }
 
@@ -60,12 +53,6 @@ public partial class Game : Node2D
         {
             GoldCounter.Text = Gold.ToString();
             dirtyGold = false;
-        }
-
-        if (dirtyModule)
-        {
-            moduleDescriptionPanel.SetModuleDescription(focusModule);
-            dirtyModule = true;
         }
 
         if (waveInProgress && ActiveEnemies == 0 && Waves.DoneSpawning())
@@ -80,11 +67,21 @@ public partial class Game : Node2D
     {
     }
 
-    public void SetBuildButton(TowerModule template)
+    public void SetBuildButton(String name)
     {
         var button = new Button();
-        button.Text = template.Name;
-        button.Pressed += () => {};
+        button.Text = name;
+        if (name == "Upgrade")
+        {
+            button.Pressed += () => {
+                testTower.UpgradeTower();
+            };
+        }
+        else {
+            button.Pressed += () => {
+                testTower.AddModule(name, testTower.size-1);
+            };
+        }
 
         buildButtonsContainer.AddChild(button);
     }

@@ -1,8 +1,11 @@
 using Godot;
 using System;
 
-public partial class Module : Node2D
+public partial class BuildModule : Module
 {
+	public static readonly new int Cost = 0;
+	public readonly new string Name = "Build";
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -10,14 +13,6 @@ public partial class Module : Node2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{
-	}
-}
-
-public class BuildModule : Module
-{
-	public static readonly int Cost = 0;
-	public BuildModule()
 	{
 	}
 }
