@@ -6,22 +6,30 @@ public partial class Spawner : Node2D
     [Export]
     public bool Active = true;
 
-    private bool LeaveScreenNow = false;
-
     [Export]
     public int SpawnerSpeed = 100;
 
     [Export]
     public Game game;
+    [Export]
+    public AnimationPlayer animationPlayer;
 
+
+    private bool LeaveScreenNow = false;
     private Stack<EnemyTemplate> enemiesToSpawn = new();
     private int minRange;
     private int maxRange;
 
     public double SpawnDuration = 1; // Time window between two spawns
     public double durationLeft = 0; // Time left to spawn next enemy
+    public Vector2 StartingPosition = Vector2.Zero;
 
     private PackedScene EnemyScene = GD.Load<PackedScene>("res://scenes/Enemy.tscn");
+
+    public override void _Ready()
+    {
+        animationPlayer.Play("fly");
+    }
 
     public override void _Process(double delta)
     {
@@ -64,7 +72,7 @@ public partial class Spawner : Node2D
     public void SetWave(List<EnemyTemplate> enemies, int minRange, int maxRange)
     {
         Active = true;
-        Position = Vector2.Zero;
+        Position = StartingPosition;
         SpawnerSpeed = Waves.getSpawnerSpeed();
         enemiesToSpawn.Clear();
         enemies.Reverse();
