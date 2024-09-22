@@ -13,6 +13,8 @@ public partial class Spawner : Node2D
     public Game game;
     [Export]
     public AnimationPlayer animationPlayer;
+    [Export] 
+    public Sprite2D sprite;
 
 
     private bool LeaveScreenNow = false;
@@ -62,9 +64,13 @@ public partial class Spawner : Node2D
     }
 
     public void exitedScreen(){
-        if (!LeaveScreenNow){
-        SpawnerSpeed *= -1;
-        } else {
+        if (!LeaveScreenNow)
+        {
+            SpawnerSpeed *= -1;
+            sprite.FlipH = !sprite.FlipH;
+        } 
+        else 
+        {
             Active = false;
         }
     }
