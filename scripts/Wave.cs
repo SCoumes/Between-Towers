@@ -4,41 +4,28 @@ using System.Collections.Generic;
 
 public class Waves
 {
-    private static int waveIndex = 0;
+    private static int waveIndex = 2;
     private static List<Spawner> spawners = new();
 
     public static void NextWave(){
         waveIndex += 1;
-        _towerUlocks(waveIndex);
         List<List<EnemyTemplate>> EnemiesLists = _GetEnemies(waveIndex);
         List<int[]> Ranges = _getRanges(waveIndex); // Same toplevel list size as EnemiesLists, each array has 2 elements
+        double delay = 0.0;
+        GD.Print(EnemiesLists);
         foreach (var enemies in EnemiesLists)
         {
-            _SpawnDragon(enemies, Ranges[EnemiesLists.IndexOf(enemies)]);
+            GD.Print(enemies);
+            _SpawnDragon(enemies, Ranges[EnemiesLists.IndexOf(enemies)], delay);
+            delay += 3.0;
         }
         _SetWind();
     }
 
     public static void EndWave(){
         _cleanSpawners();
+        _towerUlocks(waveIndex);
     }
-
-    private static void _towerUlocks(int IndexNumber)
-    {
-        switch (IndexNumber)
-        {
-            case 3:
-                Game.game.tower2.UpgradeTower();
-                Game.game.tower4.UpgradeTower();
-                break;
-            case 5:
-                Game.game.tower1.UpgradeTower();
-                Game.game.tower5.UpgradeTower();
-                break;
-            default:
-                break;
-        }
-    }   
 
     /// <summary>
     /// Checks if all the enemies have been spawned.
@@ -57,16 +44,16 @@ public class Waves
         }
         spawners.Clear();
     }
-    private static void _SpawnDragon(List<EnemyTemplate> enemies, int[] range)
+    private static void _SpawnDragon(List<EnemyTemplate> enemies, int[] range, double delay)
     {
         int min = range[0];
         int max = range[1];
         PackedScene SceneOfSpawner = GD.Load<PackedScene>("res://scenes/Spawner.tscn");
         var spawner = SceneOfSpawner.Instantiate<Spawner>();
         Game.game.AddChild(spawner);
-        spawner.StartingPosition = new Vector2(10, 30);
+        spawner.StartingPosition = new Vector2(-64, 30);
         spawner.game = Game.game;
-        spawner.SetWave(enemies, min, max);
+        spawner.SetWave(enemies, min, max, delay);
         spawners.Add(spawner);
     }
 
@@ -74,8 +61,23 @@ public class Waves
     {
         Game.game.WindValue.Text = getWindSpeed().ToString();
     }
-
-    private static List<List<EnemyTemplate>> _GetEnemies(int IndexNumber, bool debug = true)
+    private static void _towerUlocks(int IndexNumber)
+    {
+        switch (IndexNumber)
+        {
+            case 2:
+                Game.game.tower2.UpgradeTower();
+                Game.game.tower4.UpgradeTower();
+                break;
+            case 4:
+                Game.game.tower1.UpgradeTower();
+                Game.game.tower5.UpgradeTower();
+                break;
+            default:
+                break;
+        }
+    }   
+    private static List<List<EnemyTemplate>> _GetEnemies(int IndexNumber, bool debug = false)
     {
         if (debug) { return new(){new(){EnemyTemplate.BASIC}}; }
         switch (IndexNumber)
@@ -83,15 +85,33 @@ public class Waves
             case 1:
                 {
                     var enemies = new List<EnemyTemplate>(); 
-                    for (var i = 0; i < 10; i++) { enemies.Add(EnemyTemplate.BASIC); }
+                    for (var i = 0; i < 6; i++) { enemies.Add(EnemyTemplate.BASIC); }
                     return new(){enemies};
                 }
 
-            case 2:
+            case 2:{
+                    var enemies = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 6; i++) { enemies.Add(EnemyTemplate.BASIC); }
+                    return new(){enemies};
+            }
+
+            case 3:
                 {
                     var enemies = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 2; i++) { enemies.Add(EnemyTemplate.BASIC); }
+                    var enemies2 = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 2; i++) { enemies2.Add(EnemyTemplate.BASIC); }
+                    var enemies3 = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 6; i++) { enemies3.Add(EnemyTemplate.BASIC); }
+                    return new(){enemies, enemies2, enemies3};
+            }
+
+            case 15:
+                {
+                    var enemies = new List<EnemyTemplate>(); 
+                    var enemies2 = new List<EnemyTemplate>(); 
                     for (var i = 0; i < 4; i++) { enemies.Add(EnemyTemplate.BASIC); }
-                    for (var i = 0; i < 2; i++) { enemies.Add(EnemyTemplate.STRONG); }
+                    for (var i = 0; i < 2; i++) { enemies2.Add(EnemyTemplate.STRONG); }
                     return new(){enemies};
             }
             default:
@@ -110,7 +130,9 @@ public class Waves
             case 1:
                 return new() { new int[2] {500, 600} };
             case 2:
-                return new() { new int[2] {100, 800} };
+                return new() { new int[2] {300, 400} };
+            case 3:
+                return new() { new int[2] {300, 400}, new int[2] {800, 900}, new int[2] {500, 600} };
             default:
                 return new() { new int[2] {100, 800} };
         }
@@ -123,9 +145,9 @@ public class Waves
             case 1:
                 return 0;
             case 2:
-                return 20;
+                return 30;
             case 3:
-                return -20;
+                return 0;
             default:
                 return 2;
         }
@@ -140,10 +162,6 @@ public class Waves
     {
         switch (waveIndex)
         {
-            case 1:
-                return 100;
-            case 2:
-                return 100;
             default:
                 return 50;
         }

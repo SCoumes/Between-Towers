@@ -36,6 +36,8 @@ public partial class Tower : Node2D
 	public void OnModuleCliked(String ButtonText, int ModuleIndex){
 		switch (ButtonText){
 			case "Upgrade":
+				if (Game.Gold < 5*size) {return;}
+				Game.Gold -= 5*size;
 				UpgradeTower();
 				break;
 			case "Remove":

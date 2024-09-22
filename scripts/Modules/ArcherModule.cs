@@ -30,7 +30,7 @@ public partial class ArcherModule : Module
 
 		if (Target is null) _findTarget();
 		if (Target is null) return;
-		Target.Damage(1);
+		Target.Damage(2);
 		TimeSinceLastShot = 0;
 	}
 
