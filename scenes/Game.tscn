@@ -8,12 +8,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43gbm"]
 size = Vector2(1153, 59)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "groundDetection", "tower1", "tower2", "tower3", "tower4", "tower5")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "groundDetection", "tower1", "tower2", "tower3", "tower4", "tower5")]
 scale = Vector2(2, 2)
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("CanvasLayer/Label")
 buildButtonsContainer = NodePath("CanvasLayer/BuildButtonContainer")
+UpgradeButtonGroup = ExtResource("8_p16dp")
+testTower = NodePath("Towers/Tower3")
 groundDetection = NodePath("GroundDetection")
 tower1 = NodePath("Towers/Tower")
 tower2 = NodePath("Towers/Tower2")
@@ -51,20 +53,25 @@ text = "NEXT_PHASE"
 
 [node name="Towers" type="Node2D" parent="."]
 
-[node name="Tower" parent="Towers" instance=ExtResource("3_jxpa0")]
+[node name="Tower" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
 position = Vector2(152, 591)
+massonry = NodePath("Massonry appearance")
 
-[node name="Tower2" parent="Towers" instance=ExtResource("3_jxpa0")]
+[node name="Tower2" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
 position = Vector2(338, 586)
+massonry = NodePath("Massonry appearance")
 
-[node name="Tower3" parent="Towers" instance=ExtResource("3_jxpa0")]
+[node name="Tower3" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
 position = Vector2(578, 585)
+massonry = NodePath("Massonry appearance")
 
-[node name="Tower4" parent="Towers" instance=ExtResource("3_jxpa0")]
+[node name="Tower4" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
 position = Vector2(820, 588)
+massonry = NodePath("Massonry appearance")
 
-[node name="Tower5" parent="Towers" instance=ExtResource("3_jxpa0")]
+[node name="Tower5" parent="Towers" node_paths=PackedStringArray("massonry") instance=ExtResource("3_jxpa0")]
 position = Vector2(1002, 585)
+massonry = NodePath("Massonry appearance")
 
 [node name="GroundDetection" type="Area2D" parent="."]
 script = ExtResource("5_3rd4u")
