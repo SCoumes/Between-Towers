@@ -90,6 +90,13 @@ public partial class Spawner : Node2D
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="enemies"></param>
+    /// <param name="minRange"></param>
+    /// <param name="maxRange"></param>
+    /// <param name="delay"> Time before launch of dragon</param>
     public void SetWave(List<EnemyTemplate> enemies, int minRange, int maxRange, double delay)
     {
         Active = true;
