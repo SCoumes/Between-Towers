@@ -23,6 +23,7 @@ public partial class Enemy : CharacterBody2D
         currentHP = Template.MaxHP;
         HealthBar.Value = currentHP;
         GoldValue = Template.GoldValue;
+        Modulate = Template.Modulate;
 
         velocity = Template.Speed * Vector2.Down;
         animationPlayer.Play("idle");
