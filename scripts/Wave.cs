@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Waves
 {
-    private static int waveIndex = 2;
+    private static int waveIndex = 3;
     private static List<Spawner> spawners = new();
 
     public static void NextWave(){
@@ -17,7 +17,7 @@ public class Waves
         {
             GD.Print(enemies);
             _SpawnDragon(enemies, Ranges[EnemiesLists.IndexOf(enemies)], delay);
-            delay += 3.0;
+            delay += GetDelay(waveIndex);
         }
         _SetWind();
     }
@@ -105,7 +105,16 @@ public class Waves
                     for (var i = 0; i < 6; i++) { enemies3.Add(EnemyTemplate.BASIC); }
                     return new(){enemies, enemies2, enemies3};
             }
-
+            case 4:
+                {
+                    var enemies = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 10; i++) { enemies.Add(EnemyTemplate.BASIC); }
+                    var enemies2 = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 10; i++) { enemies2.Add(EnemyTemplate.BASIC); }
+                    var enemies3 = new List<EnemyTemplate>(); 
+                    for (var i = 0; i < 10; i++) { enemies3.Add(EnemyTemplate.BASIC); }
+                    return new(){enemies, enemies2, enemies3};
+            }
             case 15:
                 {
                     var enemies = new List<EnemyTemplate>(); 
@@ -133,6 +142,8 @@ public class Waves
                 return new() { new int[2] {300, 400} };
             case 3:
                 return new() { new int[2] {300, 400}, new int[2] {800, 900}, new int[2] {500, 600} };
+            case 4:
+                return new() { new int[2] {300, 400}, new int[2] {450, 550}, new int[2] {400, 500} };
             default:
                 return new() { new int[2] {100, 800} };
         }
@@ -148,8 +159,21 @@ public class Waves
                 return 30;
             case 3:
                 return 0;
+            case 4:
+                return 30;
             default:
                 return 2;
+        }
+    }
+
+    private static double GetDelay(int IndexNumber){
+        switch (IndexNumber)
+        {
+            case 4:
+                return 6.0;
+
+            default:
+                return 3.0;
         }
     }
 
@@ -162,6 +186,8 @@ public class Waves
     {
         switch (waveIndex)
         {
+            case 3:
+                return 100;
             default:
                 return 50;
         }

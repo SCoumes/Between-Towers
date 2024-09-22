@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cr8pnyb2fqal"]
+
+[ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://assets/tower_masonry.png" id="1_kqpf7"]
+[ext_resource type="Script" path="res://scripts/Modules/MarksmanModule.cs" id="1_wnott"]
+[ext_resource type="Texture2D" uid="uid://bm304m623u2tw" path="res://assets/canon.png" id="3_nq12j"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qdnv3"]
+texture = ExtResource("1_kqpf7")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_n8pa5"]
+sources/1 = SubResource("TileSetAtlasSource_qdnv3")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1oep"]
+size = Vector2(30, 29)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vl0qu"]
+radius = 373.193
+
+[node name="Marksman" type="Node2D"]
+script = ExtResource("1_wnott")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(-8, -8)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_n8pa5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_nq12j")
+
+[node name="ClickDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickDetection"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_l1oep")
+
+[node name="EnemyDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetection"]
+shape = SubResource("CircleShape2D_vl0qu")
+debug_color = Color(0.886146, 0.318737, 0.237484, 0.42)
+
+[connection signal="input_event" from="ClickDetection" to="." method="OnClick"]

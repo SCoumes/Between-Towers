@@ -44,6 +44,9 @@ public partial class Tower : Node2D
 			case "Archers":
 				AddModule("Archer", ModuleIndex);
 				break;
+			case "Canons":
+				AddModule("Marksman", ModuleIndex);
+				break;
 			default:
 				throw new Exception("Invalid button name");
 		}
@@ -62,6 +65,11 @@ public partial class Tower : Node2D
 				PackedScene ArcherScene = GD.Load<PackedScene>("res://scenes/Modules/archer_module.tscn");
 				module = ArcherScene.Instantiate<ArcherModule>();
 				Cost = ArcherModule.Cost;
+				break;
+			case "Marksman":
+				PackedScene MarksmanScene = GD.Load<PackedScene>("res://scenes/Modules/marksman.tscn");
+				module = MarksmanScene.Instantiate<MarksmanModule>();
+				Cost = MarksmanModule.Cost;
 				break;
 			default:
 				throw new Exception("Invalid module name");

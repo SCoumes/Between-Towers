@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dgk7c4lk46xdq" path="res://assets/archer.png" id="1_ubgvl"]
 [ext_resource type="Texture2D" uid="uid://uf7qs1sk66qm" path="res://assets/tower_masonry.png" id="2_loi5x"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0prpy"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vfyrw"]
 texture = ExtResource("2_loi5x")
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
@@ -12,7 +12,7 @@ texture = ExtResource("2_loi5x")
 2:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_5qxph"]
-sources/1 = SubResource("TileSetAtlasSource_0prpy")
+sources/1 = SubResource("TileSetAtlasSource_vfyrw")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3sjj6"]
 size = Vector2(30, 29)
