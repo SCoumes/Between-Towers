@@ -1,0 +1,34 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://3ijscbms8uv4"]
+
+[ext_resource type="Texture2D" uid="uid://8mw74vt7w813" path="res://assets/ui/Button_Hover.png" id="1_luabe"]
+[ext_resource type="Texture2D" uid="uid://dfljau2bpyrfb" path="res://assets/ui/Button_Red.png" id="2_ajyy7"]
+[ext_resource type="Texture2D" uid="uid://cfk0q2usv2sgh" path="res://assets/ui/Button_Red_Pressed.png" id="3_wh6dp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wu4n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0rme"]
+texture = ExtResource("1_luabe")
+texture_margin_left = 16.0
+texture_margin_top = 8.0
+texture_margin_right = 16.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oayon"]
+texture = ExtResource("2_ajyy7")
+texture_margin_left = 16.0
+texture_margin_top = 8.0
+texture_margin_right = 16.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_46hjj"]
+texture = ExtResource("3_wh6dp")
+texture_margin_left = 16.0
+texture_margin_top = 8.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxEmpty_3wu4n")
+Button/styles/hover = SubResource("StyleBoxTexture_o0rme")
+Button/styles/normal = SubResource("StyleBoxTexture_oayon")
+Button/styles/pressed = SubResource("StyleBoxTexture_46hjj")

@@ -24,6 +24,10 @@ window/size/viewport_height=1296
 
 project/assembly_name="Entre Deux Tours"
 
+[gui]
+
+theme/custom="res://main_theme.tres"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
