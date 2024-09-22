@@ -10,9 +10,6 @@ public partial class Tower : Node2D
 	public int size=0;
 	public List<Module> modules = new(); // The size of this should always be equal to size. So the highest module has index size-1
 	// Called when the node enters the scene tree for the first time.
-
- 	[Export]
-	private Sprite2D massonry;
 	
 	public override void _Ready()
 	{
@@ -21,6 +18,7 @@ public partial class Tower : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+
 	}
 
 	/// <summary>
