@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cpahamhdsaeto"]
+[gd_scene load_steps=14 format=4 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
 [ext_resource type="Texture2D" uid="uid://brinvsly6ruao" path="res://assets/Golden Coin.png" id="2_g6h03"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://da6lba30m8mon" path="res://assets/world/BG3.png" id="5_8kr0m"]
 [ext_resource type="Texture2D" uid="uid://d4h5rdscmn5v7" path="res://assets/world/Tileset.png" id="6_u6fb1"]
 [ext_resource type="ButtonGroup" uid="uid://cyp50tlpxv5sn" path="res://resources/UpgradeButtons.tres" id="8_p16dp"]
+[ext_resource type="AudioStream" uid="uid://bn1iugnw4bdh4" path="res://assets/music/Goblins_Den_(Regular).wav" id="9_v8y2r"]
+[ext_resource type="AudioStream" uid="uid://2bk5gejwuqtu" path="res://assets/music/Goblins_Dance_(Battle).wav" id="10_oss3c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cu6pa"]
 texture = ExtResource("6_u6fb1")
@@ -60,7 +62,7 @@ sources/0 = SubResource("TileSetAtlasSource_cu6pa")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43gbm"]
 size = Vector2(1153, 59)
 
-[node name="Game" type="Node" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "groundDetection", "WindValue", "tower1", "tower2", "tower3", "tower4", "tower5")]
+[node name="Game" type="Node" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "buildButtonsContainer", "testTower", "groundDetection", "WindValue", "tower1", "tower2", "tower3", "tower4", "tower5", "buildupMusicPlayer", "battleMusicPlayer")]
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
 GoldCounter = NodePath("GUI/GoldDisplay/Label")
@@ -74,6 +76,8 @@ tower2 = NodePath("Towers/Tower2")
 tower3 = NodePath("Towers/Tower3")
 tower4 = NodePath("Towers/Tower4")
 tower5 = NodePath("Towers/Tower5")
+buildupMusicPlayer = NodePath("Music/Buildup")
+battleMusicPlayer = NodePath("Music/Battle")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -214,5 +218,15 @@ script = ExtResource("5_3rd4u")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetection"]
 position = Vector2(577, 618)
 shape = SubResource("RectangleShape2D_43gbm")
+
+[node name="Music" type="Node" parent="."]
+
+[node name="Buildup" type="AudioStreamPlayer" parent="Music"]
+unique_name_in_owner = true
+stream = ExtResource("9_v8y2r")
+
+[node name="Battle" type="AudioStreamPlayer" parent="Music"]
+unique_name_in_owner = true
+stream = ExtResource("10_oss3c")
 
 [connection signal="pressed" from="GUI/Button" to="." method="OnNextWaveButtonPressed"]

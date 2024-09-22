@@ -53,6 +53,11 @@ public partial class Game : Node
     [Export]
     public Tower tower5;
 
+    [Export]
+    public AudioStreamPlayer buildupMusicPlayer;
+    [Export]
+    public AudioStreamPlayer battleMusicPlayer;
+
 
     public static Game game;
 
@@ -61,7 +66,7 @@ public partial class Game : Node
         //SetupWaves();
 
         game = this;
-
+        buildupMusicPlayer.Play();
         tower3.UpgradeTower();
     }
 
@@ -75,6 +80,8 @@ public partial class Game : Node
 
         if (waveInProgress && ActiveEnemies == 0 && Waves.DoneSpawning())
         {
+            battleMusicPlayer.Stop();
+            buildupMusicPlayer.Play();
             Waves.EndWave();
             Gold += 10;
             waveInProgress = false;
@@ -84,6 +91,8 @@ public partial class Game : Node
     public void OnNextWaveButtonPressed()
     {
         if (!waveInProgress){
+            buildupMusicPlayer.Stop();
+            battleMusicPlayer.Play();
             Waves.NextWave();
             waveInProgress = true;
         }
