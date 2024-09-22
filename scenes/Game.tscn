@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpahamhdsaeto"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_2tnd3"]
-[ext_resource type="Texture2D" uid="uid://cl8kfexckc7rq" path="res://assets/Golden Coin.png" id="2_g6h03"]
+[ext_resource type="Texture2D" uid="uid://brinvsly6ruao" path="res://assets/Golden Coin.png" id="2_g6h03"]
 [ext_resource type="PackedScene" uid="uid://dd8w8tk4kbuf8" path="res://scenes/Tower.tscn" id="3_jxpa0"]
 [ext_resource type="Script" path="res://scripts/GroundDetection.cs" id="5_3rd4u"]
 [ext_resource type="ButtonGroup" uid="uid://cyp50tlpxv5sn" path="res://resources/UpgradeButtons.tres" id="8_p16dp"]
@@ -39,9 +39,9 @@ grow_vertical = 0
 
 [node name="Button" type="Button" parent="GUI"]
 offset_left = 3.0
-offset_top = 601.0
+offset_top = 596.0
 offset_right = 133.0
-offset_bottom = 656.0
+offset_bottom = 651.0
 keep_pressed_outside = true
 text = "Next wave"
 
@@ -78,40 +78,26 @@ text = "WIND"
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Buttons" type="Control" parent="GUI"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Buttons" type="HBoxContainer" parent="GUI"]
 offset_left = 151.0
 offset_top = 596.0
-offset_right = 151.0
-offset_bottom = 596.0
+offset_right = 445.0
+offset_bottom = 651.0
 
 [node name="Upgrade" type="Button" parent="GUI/Buttons"]
 layout_mode = 2
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 103.0
-offset_bottom = 59.0
 toggle_mode = true
 button_group = ExtResource("8_p16dp")
 text = "Upgrade"
 
 [node name="Remove module" type="Button" parent="GUI/Buttons"]
 layout_mode = 2
-offset_left = 97.0
-offset_top = 4.0
-offset_right = 192.0
-offset_bottom = 59.0
 toggle_mode = true
 button_group = ExtResource("8_p16dp")
 text = "Remove"
 
 [node name="Archer" type="Button" parent="GUI/Buttons"]
 layout_mode = 2
-offset_left = 186.0
-offset_top = 3.0
-offset_right = 278.0
-offset_bottom = 58.0
 toggle_mode = true
 button_group = ExtResource("8_p16dp")
 text = "Archers"
