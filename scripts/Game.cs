@@ -18,6 +18,8 @@ public partial class Game : Node
     private Spawner spawner;*/
     [Export]
     private Tower testTower;
+    [Export]
+    public Node EnemiesComponent;
 
     public static int Gold
     {
@@ -25,7 +27,7 @@ public partial class Game : Node
         set { dirtyGold = true; gold = value; }
     }
 
-    private static int gold = 30;
+    private static int gold;
     private static bool dirtyGold = true;
 
     private static bool waveInProgress = false;
@@ -54,10 +56,22 @@ public partial class Game : Node
     public Tower tower5;
 
     [Export]
-    public AudioStreamPlayer buildupMusicPlayer;
+    private AudioStreamPlayer buildupMusicPlayer;
     [Export]
-    public AudioStreamPlayer battleMusicPlayer;
+    private AudioStreamPlayer battleMusicPlayer;
 
+    [Export]
+    private Label playerHealthLabel;
+    [Export]
+    private Control gameOverDisplay;
+
+    public int PlayerHealth{
+        get => playerHealth;
+        set { dirtyHealth = true; playerHealth = value; }
+    }
+
+    private int playerHealth;
+    private bool dirtyHealth = true;
 
     public static Game game;
 
@@ -66,8 +80,8 @@ public partial class Game : Node
         //SetupWaves();
 
         game = this;
-        buildupMusicPlayer.Play();
-        tower3.UpgradeTower();
+
+        StartGame();
     }
 
     public override void _Process(double delta)
@@ -76,6 +90,18 @@ public partial class Game : Node
         {
             GoldCounter.Text = Gold.ToString();
             dirtyGold = false;
+        }
+
+        if (dirtyHealth)
+        {
+            playerHealthLabel.Text = PlayerHealth.ToString();
+
+            if (PlayerHealth == 0)
+            {
+                GameOver();
+            }
+
+            dirtyHealth = false;
         }
 
         if (waveInProgress && ActiveEnemies == 0 && Waves.DoneSpawning())
@@ -102,6 +128,41 @@ public partial class Game : Node
     {
         Button button = UpgradeButtonGroup.GetPressedButton() as Button;
         tower.OnModuleCliked(button.Text, moduleIndex);
+    }
+
+    public void GameOver()
+    {
+        gameOverDisplay.Visible = true;
+        Waves.EndWave();
+
+        buildupMusicPlayer.Stop();
+        battleMusicPlayer.Stop();
+        
+        foreach (var enemy in EnemiesComponent.GetChildren())
+        {
+            enemy.CallDeferred(Enemy.MethodName.QueueFree);
+        }
+        GD.Print("Game Over");
+    }
+
+    public void StartGame()
+    {
+        gameOverDisplay.Visible = false;
+
+        Gold = 30;
+        PlayerHealth = 15;
+
+        Waves.WaveIndex = 0;
+
+        tower1.ResetTower();
+        tower2.ResetTower();
+        tower3.ResetTower();
+        tower4.ResetTower();
+        tower5.ResetTower();
+
+        tower3.UpgradeTower();
+
+        buildupMusicPlayer.Play();
     }
 }
 

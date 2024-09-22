@@ -13,7 +13,7 @@ public partial class GroundDetection : Area2D
 	{
 		if (body is Enemy _)
 		{
-			GD.Print("GroundDetection body entered");
+			Game.game.PlayerHealth -= 1;
 		}
 	}
 }

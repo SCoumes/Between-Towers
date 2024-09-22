@@ -21,6 +21,12 @@ public partial class Tower : Node2D
 
 	}
 
+	public void ResetTower()
+	{
+		size = 0;
+		modules.Clear();
+	}
+
 	/// <summary>
 	/// Upgrade the tower. This is in charge of checking gold cost and failing if there is not enough gold.
 	/// </summary>
