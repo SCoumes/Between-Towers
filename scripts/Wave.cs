@@ -7,11 +7,9 @@ public class Waves
     private static int waveIndex = 0;
     private static List<Spawner> spawners = new();
 
-
-    public static Game game;
-
     public static void NextWave(){
         waveIndex += 1;
+        _towerUlocks(waveIndex);
         List<List<EnemyTemplate>> EnemiesLists = _GetEnemies(waveIndex);
         List<int[]> Ranges = _getRanges(waveIndex); // Same toplevel list size as EnemiesLists, each array has 2 elements
         foreach (var enemies in EnemiesLists)
@@ -19,6 +17,24 @@ public class Waves
             _SpawnDragon(enemies, Ranges[EnemiesLists.IndexOf(enemies)]);
         }
     }
+
+    private static void _towerUlocks(int IndexNumber)
+    {
+        GD.Print("Unlocking towers", IndexNumber);
+        switch (IndexNumber)
+        {
+            case 3:
+                Game.game.tower2.UpgradeTower();
+                Game.game.tower4.UpgradeTower();
+                break;
+            case 5:
+                Game.game.tower1.UpgradeTower();
+                Game.game.tower5.UpgradeTower();
+                break;
+            default:
+                break;
+        }
+    }   
 
     /// <summary>
     /// Checks if all the enemies have been spawned.
@@ -40,7 +56,6 @@ public class Waves
 
     private static List<List<EnemyTemplate>> _GetEnemies(int IndexNumber)
     {
-        waveIndex += 1;
         switch (IndexNumber)
         {
             case 1:
@@ -85,8 +100,8 @@ public class Waves
         int max = range[1];
         PackedScene SceneOfSpawner = GD.Load<PackedScene>("res://scenes/Spawner.tscn");
         var spawner = SceneOfSpawner.Instantiate<Spawner>();
-        game.AddChild(spawner);
-        spawner.game = game;
+        Game.game.AddChild(spawner);
+        spawner.game = Game.game;
         spawner.SetWave(enemies, min, max);
         spawners.Add(spawner);
     }

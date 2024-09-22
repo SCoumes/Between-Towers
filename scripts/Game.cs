@@ -37,18 +37,35 @@ public partial class Game : Node2D
     [Export]
     public GroundDetection groundDetection;
 
+    [Export]
+    public Tower tower1;
+
+    [Export]
+    public Tower tower2;
+
+    [Export]
+    public Tower tower3;
+
+    [Export]
+    public Tower tower4;
+
+    [Export]
+    public Tower tower5;
+
+
     public static Game game;
+
     public override void _Ready()
     {
         //SetupWaves();
-
-        Waves.game = this;
 
         SetBuildButton("Build");
         SetBuildButton("Archer");
         SetBuildButton("Upgrade");
 
         game = this;
+
+        tower3.UpgradeTower();
     }
 
     public override void _Process(double delta)

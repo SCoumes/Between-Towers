@@ -12,7 +12,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43gbm"]
 size = Vector2(1153, 59)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "moduleDescriptionPanel", "buildButtonsContainer", "spawner", "testTower", "groundDetection")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("TowersComponent", "GoldCounter", "moduleDescriptionPanel", "buildButtonsContainer", "spawner", "testTower", "groundDetection", "tower1", "tower2", "tower3", "tower4", "tower5")]
 scale = Vector2(2, 2)
 script = ExtResource("1_2tnd3")
 TowersComponent = NodePath("Towers")
@@ -23,6 +23,11 @@ UpgradeButtonGroup = ExtResource("8_p16dp")
 spawner = NodePath("Spawners/Spawner2")
 testTower = NodePath("Towers/Tower3")
 groundDetection = NodePath("GroundDetection")
+tower1 = NodePath("Towers/Tower")
+tower2 = NodePath("Towers/Tower2")
+tower3 = NodePath("Towers/Tower3")
+tower4 = NodePath("Towers/Tower4")
+tower5 = NodePath("Towers/Tower5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
