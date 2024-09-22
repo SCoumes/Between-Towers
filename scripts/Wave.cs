@@ -12,17 +12,16 @@ public class Waves
         List<List<EnemyTemplate>> EnemiesLists = _GetEnemies(WaveIndex);
         List<int[]> Ranges = _getRanges(WaveIndex); // Same toplevel list size as EnemiesLists, each array has 2 elements
         double delay = 0.0;
-        GD.Print(EnemiesLists);
         foreach (var enemies in EnemiesLists)
         {
-            GD.Print(enemies);
             _SpawnDragon(enemies, Ranges[EnemiesLists.IndexOf(enemies)], delay);
             delay += GetDelay(WaveIndex);
         }
-        _SetWind();
     }
 
     public static void EndWave(){
+        Game.Gold += 25;
+        _SetWind(); // Set the wind for next wave
         _cleanSpawners();
         _towerUlocks(WaveIndex);
 
@@ -64,7 +63,7 @@ public class Waves
 
     private static void _SetWind()
     {
-        Game.game.WindValue.Text = getWindSpeed().ToString();
+        Game.game.WindValue.Text = getWindSpeed(WaveIndex+1).ToString();
     }
     private static void _towerUlocks(int IndexNumber)
     {
@@ -103,9 +102,9 @@ public class Waves
             case 3:
                 {
                     var enemies = new List<EnemyTemplate>(); 
-                    for (var i = 0; i < 2; i++) { enemies.Add(EnemyTemplate.BASIC); }
+                    for (var i = 0; i < 3; i++) { enemies.Add(EnemyTemplate.BASIC); }
                     var enemies2 = new List<EnemyTemplate>(); 
-                    for (var i = 0; i < 2; i++) { enemies2.Add(EnemyTemplate.BASIC); }
+                    for (var i = 0; i < 3; i++) { enemies2.Add(EnemyTemplate.BASIC); }
                     var enemies3 = new List<EnemyTemplate>(); 
                     for (var i = 0; i < 6; i++) { enemies3.Add(EnemyTemplate.BASIC); }
                     return new(){enemies, enemies2, enemies3};
@@ -187,7 +186,7 @@ public class Waves
         }
     }
 
-    private static int getWindSpeed()
+    private static int getWindSpeed(int WaveIndex)
     {
         switch (WaveIndex)
         {
@@ -233,7 +232,7 @@ public class Waves
 
     public static Vector2 getWind()
     {
-        return getWindSpeed() * Vector2.Right;
+        return getWindSpeed(WaveIndex) * Vector2.Right;
     }
 
     public static int getSpawnerSpeed()

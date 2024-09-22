@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 public partial class MarksmanModule : Module
 {
-	public static readonly new int Cost = 25;
-	public readonly new string Name = "Archer";
-	// Called when the node enters the scene tree for the first time.
+	public static readonly new int Cost = 50;
+	public readonly new string Name = "Canon";
 
 	private double CoolDown = 0.75;
 	private double TimeSinceLastShot = 0;

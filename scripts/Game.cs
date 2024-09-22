@@ -114,7 +114,6 @@ public partial class Game : Node
             battleMusicPlayer.Stop();
             buildupMusicPlayer.Play();
             Waves.EndWave();
-            Gold += 10;
             waveInProgress = false;
         }
     }
