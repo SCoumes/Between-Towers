@@ -103,7 +103,7 @@ public partial class Game : Node
         {
             playerHealthLabel.Text = PlayerHealth.ToString();
 
-            if (PlayerHealth == 0)
+            if (PlayerHealth <= 0)
             {
                 GameOver();
             }
@@ -122,6 +122,7 @@ public partial class Game : Node
 
     public void OnNextWaveButtonPressed()
     {
+        GD.Print("Wave in progress",waveInProgress);
         if (!waveInProgress){
             buildupMusicPlayer.Stop();
             battleMusicPlayer.Play();
@@ -149,6 +150,7 @@ public partial class Game : Node
     public void GameOver()
     {
         gameOverDisplay.Visible = true;
+        waveInProgress = false;
         Waves.EndWave();
 
         buildupMusicPlayer.Stop();
@@ -175,7 +177,7 @@ public partial class Game : Node
         Gold = 30;
         PlayerHealth = 15;
 
-        Waves.WaveIndex = 0;
+        Waves.StartGame();
 
         tower1.ResetTower();
         tower2.ResetTower();
